@@ -5,7 +5,33 @@ import Logo from "../Header/Logo";
 import { getServices, getSiteContent } from "@/lib/cms";
 
 const Footer = async () => {
-    const [site, services] = await Promise.all([getSiteContent(), getServices()]);
+    // The footer is rendered on every route, including the statically
+    // prerendered 404. If the database is unreachable at build time an
+    // unhandled throw here fails the whole deployment, so degrade to a
+    // minimal footer instead.
+    let site: Awaited<ReturnType<typeof getSiteContent>> | null = null;
+    let services: Awaited<ReturnType<typeof getServices>> = [];
+    try {
+        [site, services] = await Promise.all([getSiteContent(), getServices()]);
+    } catch (err) {
+        console.error("Footer could not load CMS content:", err);
+    }
+
+    if (!site) {
+        return (
+            <footer className="pt-10 pb-8 relative bg-navy text-white">
+                <div className="container mx-auto px-4 max-w-screen-xl">
+                    <div className="pb-5">
+                        <Logo variant="white" />
+                    </div>
+                    <p className="text-[15px] text-white/70">
+                        © {new Date().getFullYear()} Vulpian Consultants. All rights reserved.
+                    </p>
+                </div>
+            </footer>
+        );
+    }
+
     const { contact } = site;
 
     return (

@@ -1,6 +1,4 @@
 import React from 'react';
-import fs from 'fs';
-import path from 'path';
 import Image from 'next/image';
 import { Icon } from '@iconify/react';
 import type { Value } from "@/lib/cms";
@@ -18,19 +16,19 @@ const descriptions: Record<string, string> = {
     Impact: "Focused on measurable, practical results, not just paperwork compliance.",
 };
 
-const slugify = (title: string) => title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-
-// Drop a real vector image at /public/images/values/{slug}.svg (or .png) for
-// any value and it replaces the placeholder automatically — no code change needed.
-const findVectorImage = (title: string): string | null => {
-    const slug = slugify(title);
-    for (const ext of ["svg", "png", "webp"]) {
-        const rel = `/images/values/${slug}.${ext}`;
-        const abs = path.join(process.cwd(), "public", rel);
-        if (fs.existsSync(abs)) return rel;
-    }
-    return null;
+// Illustration per value. Declared statically rather than probed from disk:
+// public/ is served from the CDN and is not bundled into the serverless
+// function, so a filesystem check would always miss in production.
+// To add one, drop the file in public/images/values/ and add a line here.
+const illustrations: Record<string, string> = {
+    Excellence: "/images/values/excellence.png",
+    Structure: "/images/values/structure.png",
+    Accountability: "/images/values/accountability.png",
+    Growth: "/images/values/growth.png",
+    Impact: "/images/values/impact.png",
 };
+
+const findVectorImage = (title: string): string | null => illustrations[title] ?? null;
 
 const Values: React.FC<ValuesProps> = ({ values }) => {
     return (
