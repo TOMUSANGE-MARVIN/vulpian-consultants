@@ -247,60 +247,6 @@ export const blogs: BlogPost[] = [
     },
 ];
 
-export type CaseStudyArea = {
-    id: number;
-    category: string;
-    title: string;
-    slug: string;
-    image: string;
-    sector: string;
-    engagementType: string;
-    methodology: string;
-};
-
-export const caseStudyAreas: CaseStudyArea[] = [
-    {
-        id: 1,
-        category: "Public Sector",
-        title: "QMS Implementation for a Public Sector Agency",
-        slug: "qms-implementation-public-sector",
-        image: "/images/protfolio/project-1.webp",
-        sector: "Public Sector",
-        engagementType: "Implementation Partner",
-        methodology: "ISO 9001:2015",
-    },
-    {
-        id: 2,
-        category: "Financial Services",
-        title: "Internal Audit Capacity Building",
-        slug: "internal-audit-capacity-building",
-        image: "/images/protfolio/project-2.webp",
-        sector: "Financial Services",
-        engagementType: "Corporate Training",
-        methodology: "ISO 19011 Auditing Principles",
-    },
-    {
-        id: 3,
-        category: "NGO",
-        title: "Risk Management Framework Design",
-        slug: "risk-management-framework-design",
-        image: "/images/protfolio/project-3.webp",
-        sector: "Non-Profit",
-        engagementType: "Risk Management Consulting",
-        methodology: "ISO 31000:2018",
-    },
-    {
-        id: 4,
-        category: "Healthcare",
-        title: "Business Process Improvement Review",
-        slug: "business-process-improvement-review",
-        image: "/images/protfolio/project-4.webp",
-        sector: "Healthcare",
-        engagementType: "Business Process Improvement",
-        methodology: "Process Mapping & Re-engineering",
-    },
-];
-
 export const faqs = [
     {
         question: "What industries do you work with?",
