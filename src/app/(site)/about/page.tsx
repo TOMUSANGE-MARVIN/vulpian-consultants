@@ -5,7 +5,6 @@ import { Icon } from "@iconify/react";
 import Team from "@/components/Home/Team";
 import Process from "@/components/Home/Process";
 import Companies from "@/components/Home/Companies";
-import Testimonials from "@/components/Home/Testimonials";
 import { getLeadConsultant, getSiteContent } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
@@ -110,7 +109,6 @@ const Page = async () => {
             <Process approach={site.approach} />
 
             <Companies />
-            <Testimonials />
             <Team member={lead} />
         </>
     );
