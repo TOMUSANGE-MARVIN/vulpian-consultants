@@ -1,14 +1,16 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react';
 import Logo from './Logo';
-import { headerData } from './Navigation/menuData';
+import { buildHeaderData } from './Navigation/menuData';
 import HeaderLinks from './Navigation/headerLinks';
 import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import Sidebar from './Sidebar';
 import MobileHeaderLink from './Navigation/mobileheaderLinks';
+import type { SubmenuItem } from '@/type/menu';
 
-const Header: React.FC = () => {
+const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] }) => {
+    const headerData = buildHeaderData(serviceLinks);
     const [sticky, setSticky] = useState(false);
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
     const [navbarOpen, setNavbarOpen] = useState(false);
@@ -25,17 +27,15 @@ const Header: React.FC = () => {
     return (
         <>
             <header
-                className={`fixed h-24 px-4 top-5 left-[2.5%] py-1 z-50 w-[95%] flex navbar items-center transition-all duration-500 rounded-3xl 
-        ${sticky ? "bg-black/80 backdrop-blur-lg shadow-lg w-[90%]" : "bg-white/10 backdrop-blur-sm"}
-      `}
+                className="fixed h-24 px-4 top-5 left-[2.5%] py-1 z-50 w-[95%] flex navbar items-center transition-all duration-500 rounded-3xl bg-white/10 backdrop-blur-sm"
             >
                 <div className="container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) flex justify-between items-center xl:gap-16 lg:gap-8 py-6">
                     <div className='text-white'>
-                        <Logo variant="white" />
+                        <Logo />
                     </div>
                     <nav className='hidden lg:flex grow items-center justify-center space-x-10 text-base'>
                         {headerData.map((item, index) => (
-                            <HeaderLinks key={index} item={item} />
+                            <HeaderLinks key={index} item={item} scrolled={sticky} />
                         ))}
                     </nav>
 
@@ -53,13 +53,13 @@ const Header: React.FC = () => {
                             className="block p-2 cursor-pointer group"
                             aria-label="Toggle mobile menu"
                         >
-                            <span className="block w-6 h-0.5 bg-white"></span>
+                            <span className={`block w-6 h-0.5 transition-colors duration-500 ${sticky ? "bg-prim" : "bg-white"}`}></span>
 
                             <span
-                                className="block w-4 h-0.5 bg-white mt-1.5 transition-all duration-300 ease-in-out group-hover:w-6"
+                                className={`block w-4 h-0.5 mt-1.5 transition-all duration-300 ease-in-out group-hover:w-6 ${sticky ? "bg-prim" : "bg-white"}`}
                             ></span>
 
-                            <span className="block w-6 h-0.5 bg-white mt-1.5"></span>
+                            <span className={`block w-6 h-0.5 mt-1.5 transition-colors duration-500 ${sticky ? "bg-prim" : "bg-white"}`}></span>
                         </button>
                     </div>
 
@@ -68,13 +68,13 @@ const Header: React.FC = () => {
                         className="lg:hidden block p-2 cursor-pointer group"
                         aria-label="Toggle mobile menu"
                     >
-                        <span className="block w-6 h-0.5 bg-white"></span>
+                        <span className={`block w-6 h-0.5 transition-colors duration-500 ${sticky ? "bg-prim" : "bg-white"}`}></span>
 
                         <span
-                            className="block w-4 h-0.5 bg-white mt-1.5 transition-all duration-300 ease-in-out group-hover:w-6"
+                            className={`block w-4 h-0.5 mt-1.5 transition-all duration-300 ease-in-out group-hover:w-6 ${sticky ? "bg-prim" : "bg-white"}`}
                         ></span>
 
-                        <span className="block w-6 h-0.5 bg-white mt-1.5"></span>
+                        <span className={`block w-6 h-0.5 mt-1.5 transition-colors duration-500 ${sticky ? "bg-prim" : "bg-white"}`}></span>
                     </button>
                 </div>
 

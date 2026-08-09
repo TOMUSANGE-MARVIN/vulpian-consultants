@@ -1,7 +1,8 @@
 "use client";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import React from 'react';
+import type { Swiper as SwiperClass } from "swiper";
+import React, { useRef, useState } from 'react';
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -12,6 +13,9 @@ import { Icon } from "@iconify/react";
 import { focusAreas as projects } from "@/lib/staticContent";
 
 const Projects: React.FC = () => {
+    const swiperRef = useRef<SwiperClass | null>(null);
+    const [active, setActive] = useState(0);
+
     return (
         <>
             <section className="bg-light overflow-hidden py-14 lg:py-18 xl:py-22 bg-prim-light">
@@ -30,9 +34,10 @@ const Projects: React.FC = () => {
                     slidesPerView={1.5}
                     loop={true}
                     centeredSlides={true}
-                    speed={4000}
-                    autoplay={{ delay: 0, disableOnInteraction: false }}
-                    allowTouchMove={false}
+                    speed={700}
+                    autoplay={{ delay: 4000, disableOnInteraction: false }}
+                    onSwiper={(swiper) => { swiperRef.current = swiper; }}
+                    onSlideChange={(swiper) => setActive(swiper.realIndex % projects.length)}
                     breakpoints={{
                         1400: { slidesPerView: 1.5 },
                         0: { slidesPerView: 1 }
@@ -44,8 +49,9 @@ const Projects: React.FC = () => {
                                 <div className="project-image w-full sm:w-[50%] h-full">
                                     <Image
                                         src={project.image}
-                                        width={350}
-                                        height={350}
+                                        width={800}
+                                        height={1000}
+                                        sizes="(max-width: 640px) 100vw, 35vw"
                                         alt="project-image"
                                         className="w-full h-full object-cover rounded-xl"
                                     />
@@ -73,6 +79,19 @@ const Projects: React.FC = () => {
                         </SwiperSlide>
                     ))}
                 </Swiper>
+
+                <div className="focus-pagination">
+                    {projects.map((project, index) => (
+                        <button
+                            key={index}
+                            type="button"
+                            onClick={() => swiperRef.current?.slideToLoop(index)}
+                            aria-label={`Show ${project.title}`}
+                            aria-current={active === index}
+                            className={`focus-dot ${active === index ? "focus-dot-active" : ""}`}
+                        />
+                    ))}
+                </div>
 
             </section >
         </>

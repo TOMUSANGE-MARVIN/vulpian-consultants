@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import Reveal from "@/components/SharedComponents/Reveal";
 import React from "react";
 import type { TeamMember } from "@/lib/cms";
 
@@ -25,7 +26,7 @@ const Team: React.FC<TeamProps> = ({ member, compact }) => {
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-10 items-start">
-                    <div className="w-full lg:w-[35%] shrink-0">
+                    <Reveal direction="left" className="w-full lg:w-[35%] shrink-0">
                         <div className="bg-white rounded-2xl overflow-hidden aspect-[4/5] flex items-center justify-center">
                             {member.photoUrl ? (
                                 <Image
@@ -39,9 +40,9 @@ const Team: React.FC<TeamProps> = ({ member, compact }) => {
                                 <Icon icon="mdi:account-circle" width={160} height={160} className="text-prim/40" />
                             )}
                         </div>
-                    </div>
+                    </Reveal>
 
-                    <div className="w-full lg:w-[65%] space-y-6">
+                    <Reveal direction="right" className="w-full lg:w-[65%] space-y-6">
                         {member.bio.slice(0, compact ? 2 : undefined).map((p, i) => (
                             <p key={i} className="text-pera-dark text-16 leading-7">{p}</p>
                         ))}
@@ -59,7 +60,7 @@ const Team: React.FC<TeamProps> = ({ member, compact }) => {
                                 </ul>
                             </div>
                         )}
-                    </div>
+                    </Reveal>
                 </div>
             </div>
         </section>

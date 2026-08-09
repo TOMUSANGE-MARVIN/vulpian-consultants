@@ -8,6 +8,7 @@ import Projects from "@/components/Home/Projects";
 import Solution from "@/components/Home/Solution";
 import Team from "@/components/Home/Team";
 import Testimonials from "@/components/Home/Testimonials";
+import Values from "@/components/Home/Values";
 import { getLeadConsultant, getServices, getSiteContent } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
@@ -29,9 +30,10 @@ export default async function Home() {
           ctaHref={site.hero.ctaHref}
           since={site.since}
         />
+        <Commitment paragraphs={site.whoWeAre.paragraphs} since={site.since} />
+        <Values values={site.values} />
         <Solution services={services.slice(0, 8)} />
         <Companies />
-        <Commitment paragraphs={site.whoWeAre.paragraphs} values={site.values} since={site.since} />
         <Process approach={site.approach} />
         <Projects />
         <Testimonials />

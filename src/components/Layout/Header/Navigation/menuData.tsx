@@ -1,40 +1,16 @@
-import { HeaderItem } from "@/type/menu";
+import { HeaderItem, SubmenuItem } from "@/type/menu";
 
-export const headerData: HeaderItem[] = [
+// The Services submenu is populated from the CMS at render time, so adding a
+// service in the admin makes it appear in the nav automatically.
+export const buildHeaderData = (serviceLinks: SubmenuItem[] = []): HeaderItem[] => [
     { label: "Home", href: "/" },
-    {
-        label: "Pages",
-        href: "#",
-        submenu: [
-            { label: "About Us", href: "/about" },
-            { label: "Lead Consultant", href: "/team" },
-            { label: "Faq", href: "/faq" },
-            { label: "Contact", href: "/contact" }
-        ]
-    },
+    { label: "About Us", href: "/about" },
     {
         label: "Services",
         href: "/services",
-        submenu: [
-            { label: "Services List", href: "/services" },
-            { label: "Services Details", href: "/services/quality-management-systems-consulting" }
-        ]
+        submenu: serviceLinks.length > 0 ? serviceLinks : undefined,
     },
-    {
-        label: "Case Studies",
-        href: "/protfolio",
-        submenu: [
-            { label: "Case Studies", href: "/protfolio" },
-            { label: "Case Study Details", href: "/protfolio/qms-implementation-public-sector" }
-        ]
-    },
-    {
-        label: "Blog",
-        href: "/blog",
-        submenu: [
-            { label: "Blog", href: "/blog" },
-            { label: "Blog Details", href: "/blog/why-iso-9001-matters-beyond-compliance" }
-        ]
-    },
+    { label: "FAQ", href: "/faq" },
+    { label: "Blogs", href: "/blog" },
     { label: "Contact", href: "/contact" },
-]
+];

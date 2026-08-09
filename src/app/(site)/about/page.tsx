@@ -23,7 +23,7 @@ const Page = async () => {
             <HeroSub title="About" description="" breadcrumbLinks={breadcrumbLinks} />
 
             {/* Who We Are */}
-            <div className="bg-light overflow-hidden py-14 lg:py-18 xl:py-22">
+            <div id="who-we-are" className="bg-light overflow-hidden py-14 lg:py-18 xl:py-22 scroll-mt-32">
                 <div className="container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) px-4 space-y-8">
                     <div>
                         <span className='sub-title text-14 bg-prim text-white py-1 rounded-xl relative font-chakrapetch capitalize ps-5 pe-3'>

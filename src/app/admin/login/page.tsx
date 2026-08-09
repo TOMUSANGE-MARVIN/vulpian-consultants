@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function LoginPage() {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
@@ -17,7 +18,7 @@ export default function LoginPage() {
         const res = await fetch("/api/admin/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ password }),
+            body: JSON.stringify({ email, password }),
         });
 
         setLoading(false);
@@ -26,7 +27,7 @@ export default function LoginPage() {
             router.push("/admin");
             router.refresh();
         } else {
-            setError("Incorrect password");
+            setError("Incorrect email or password");
         }
     };
 
@@ -38,14 +39,26 @@ export default function LoginPage() {
                     <p className="text-gray-500 text-sm mt-1">Sign in to manage site content</p>
                 </div>
                 <div>
+                    <label className="block text-gray-600 text-sm font-medium mb-2">Email</label>
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-prim"
+                        autoComplete="username"
+                        required
+                        autoFocus
+                    />
+                </div>
+                <div>
                     <label className="block text-gray-600 text-sm font-medium mb-2">Password</label>
                     <input
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-prim"
+                        autoComplete="current-password"
                         required
-                        autoFocus
                     />
                 </div>
                 {error && <p className="text-red-600 text-sm">{error}</p>}

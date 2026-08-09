@@ -26,8 +26,9 @@ const Blog: React.FC = () => {
                                     <Image
                                         src={item.image}
                                         alt={item.title}
-                                        width={250}
-                                        height={250}
+                                        width={1540}
+                                        height={700}
+                                        sizes="(max-width: 768px) 100vw, 50vw"
                                         className="w-full h-[320px] group-hover:scale-110 transition duration-500 object-cover"
                                     />
                                     <span className="absolute right-5 bottom-5 max-w-sm text-white font-chakrapetch bg-white/10 font-semibold backdrop-blur-sm rounded-sm text-2xl text-center p-3">
@@ -64,8 +65,9 @@ const Blog: React.FC = () => {
                                         <Image
                                             src={item.image}
                                             alt={item.title}
-                                            width={250}
-                                            height={250}
+                                            width={1540}
+                                            height={700}
+                                            sizes="(max-width: 768px) 100vw, 30vw"
                                             className="w-full h-full group-hover:scale-110 transition duration-500 object-cover"
                                         />
                                         <span className="absolute right-5 bottom-5 max-w-sm text-white font-chakrapetch bg-white/10 font-semibold backdrop-blur-sm rounded-sm text-2xl text-center p-3">

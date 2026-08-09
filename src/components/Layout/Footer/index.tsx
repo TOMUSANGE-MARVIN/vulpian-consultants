@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Logo from "../Header/Logo";
 import { getServices, getSiteContent } from "@/lib/cms";
@@ -8,13 +9,27 @@ const Footer = async () => {
     const { contact } = site;
 
     return (
-        <footer className="pt-10 relative bg-white">
-            <div className="container mx-auto px-4 max-w-screen-xl">
+        <footer className="pt-10 relative bg-navy text-white overflow-hidden">
+            {/* decorative halftone world map, right-hand side */}
+            <div
+                aria-hidden
+                className="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 hidden md:block w-[62%] max-w-[820px] opacity-[0.13]"
+            >
+                <Image
+                    src="/images/footer/world-map.png"
+                    alt=""
+                    width={1400}
+                    height={717}
+                    className="w-full h-auto object-contain"
+                />
+            </div>
+
+            <div className="container mx-auto px-4 max-w-screen-xl relative z-10">
                 {/* ===== Top Contact Section ===== */}
-                <div className="flex flex-col lg:flex-row justify-between lg:items-center border-b pb-10 mb-10 gap-6">
+                <div className="flex flex-col lg:flex-row justify-between lg:items-center border-b border-white/15 pb-10 mb-10 gap-6">
                     {/* Contact Info */}
                     <div className="flex flex-wrap md:flex-nowrap gap-6">
-                        <div className="flex items-start text-foottext text-[15px]">
+                        <div className="flex items-start text-white/70 text-[15px]">
                             <Icon icon="weui:location-outlined" className="w-6 h-6 mr-3 mt-1" />
                             <div className="flex flex-col">
                                 <span>{contact.address}</span>
@@ -22,16 +37,16 @@ const Footer = async () => {
                         </div>
 
                         {contact.phones.map((phone, i) => (
-                            <div key={i} className="flex items-center gap-2 text-foottext">
+                            <div key={i} className="flex items-center gap-2 text-white/70">
                                 <Icon icon="majesticons:phone-retro-line" className="w-6 h-6" />
                                 <span className="text-[15px]">{phone}</span>
                             </div>
                         ))}
 
                         {contact.emails.map((email, i) => (
-                            <div key={i} className="flex items-center gap-2 text-foottext">
+                            <div key={i} className="flex items-center gap-2 text-white/70">
                                 <Icon icon="clarity:email-line" className="w-6 h-6" />
-                                <Link href={`mailto:${email}`} className="text-[15px] hover:text-prim">
+                                <Link href={`mailto:${email}`} className="text-[15px] hover:text-white">
                                     {email}
                                 </Link>
                             </div>
@@ -39,7 +54,7 @@ const Footer = async () => {
                     </div>
 
                     {/* Social */}
-                    <div className="flex gap-4 items-center text-foottext text-[15px]">
+                    <div className="flex gap-4 items-center text-white/70 text-[15px]">
                         <span className="flex items-center gap-2">
                             <Icon icon="ri:linkedin-fill" width="24" height="24" />
                             {contact.linkedin}
@@ -55,10 +70,10 @@ const Footer = async () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8">
                     {/* Left Column - Logo + About */}
                     <div className="lg:col-span-5">
-                        <div className="text-black pb-5">
-                            <Logo />
+                        <div className="pb-5">
+                            <Logo variant="white" />
                         </div>
-                        <p className="text-[14px] leading-6 text-foottext max-w-md">
+                        <p className="text-[14px] leading-6 text-white/70 max-w-md">
                             {site.tagline} — a professional consulting firm helping organizations achieve
                             operational excellence through Quality Management Systems, organizational
                             transformation, and business performance improvement. Since {site.since}.
@@ -67,7 +82,7 @@ const Footer = async () => {
 
                     {/* Services Column */}
                     <div className="lg:col-span-4">
-                        <h4 className="text-[18px] text-black mb-3 font-chakrapetch font-bold">
+                        <h4 className="text-[18px] text-white mb-3 font-chakrapetch font-bold">
                             Services
                         </h4>
                         <ul>
@@ -75,7 +90,7 @@ const Footer = async () => {
                                 <li key={service._id} className="pb-2">
                                     <Link
                                         href={`/services/${service.slug}`}
-                                        className="text-foottext text-[15px] hover:text-prim transition-colors"
+                                        className="text-white/70 text-[15px] hover:text-white transition-colors"
                                     >
                                         {service.title}
                                     </Link>
@@ -86,7 +101,7 @@ const Footer = async () => {
 
                     {/* Company Column */}
                     <div className="lg:col-span-3">
-                        <h4 className="text-[18px] text-black mb-3 font-chakrapetch font-bold">
+                        <h4 className="text-[18px] text-white mb-3 font-chakrapetch font-bold">
                             Company
                         </h4>
                         <ul>
@@ -99,7 +114,7 @@ const Footer = async () => {
                                 <li key={item.href} className="pb-2">
                                     <Link
                                         href={item.href}
-                                        className="text-foottext text-[15px] hover:text-prim transition-colors"
+                                        className="text-white/70 text-[15px] hover:text-white transition-colors"
                                     >
                                         {item.label}
                                     </Link>
@@ -110,8 +125,8 @@ const Footer = async () => {
                 </div>
 
                 {/* ===== Bottom Section ===== */}
-                <div className="flex flex-col sm:flex-row justify-between items-center border-t mt-10 pt-6 text-center sm:text-left">
-                    <p className="text-[15px] text-foottext mb-3 sm:mb-0">
+                <div className="flex flex-col sm:flex-row justify-between items-center border-t border-white/15 mt-10 pt-6 text-center sm:text-left">
+                    <p className="text-[15px] text-white/70 mb-3 sm:mb-0">
                         © {new Date().getFullYear()} {site.companyName}. All rights reserved.
                     </p>
                 </div>

@@ -25,9 +25,24 @@ export async function dbConnect() {
     if (!cache.promise) {
         cache.promise = mongoose.connect(MONGODB_URI, {
             bufferCommands: false,
+            // Fail fast rather than hanging. The default (30s, plus retries)
+            // exceeds the build's per-page prerender budget and would leave a
+            // serverless request hanging instead of degrading gracefully.
+            serverSelectionTimeoutMS: 8000,
+            connectTimeoutMS: 8000,
         });
     }
 
-    cache.conn = await cache.promise;
+    try {
+        cache.conn = await cache.promise;
+    } catch (err) {
+        // Drop the failed promise, otherwise every later call awaits the same
+        // rejected one and the process never reconnects — even once the network
+        // or the Atlas IP allow-list is fixed.
+        cache.promise = null;
+        cache.conn = null;
+        throw err;
+    }
+
     return cache.conn;
 }

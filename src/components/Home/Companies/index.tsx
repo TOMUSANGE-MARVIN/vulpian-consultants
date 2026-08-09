@@ -2,17 +2,19 @@
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import React from 'react';
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Icon } from "@iconify/react";
 
+// renderHeight is tuned per logo so they carry similar optical weight —
+// the wide PECB wordmark needs less height than the circular marks.
 const standards = [
-    { label: "ISO 9001:2015", sub: "Quality Management", icon: "mdi:certificate-outline" },
-    { label: "ISO 31000:2018", sub: "Risk Management", icon: "carbon:risk" },
-    { label: "ISO 19011", sub: "Auditing Guidelines", icon: "mdi:clipboard-check-outline" },
-    { label: "PECB Certified", sub: "Training & Certification", icon: "mdi:school-outline" },
-    { label: "PMP®", sub: "Project Management", icon: "mdi:briefcase-outline" },
+    { label: "ISO 9001:2015", sub: "Quality Management", src: "/images/standards/iso-9001.png", width: 157, height: 160, renderHeight: 58 },
+    { label: "ISO 31000:2018", sub: "Risk Management", src: "/images/standards/iso-31000.png", width: 162, height: 160, renderHeight: 58 },
+    { label: "ISO 19011", sub: "Auditing Guidelines", src: "/images/standards/iso-19011.png", width: 218, height: 160, renderHeight: 52 },
+    { label: "PECB", sub: "Training & Certification", src: "/images/standards/pecb.png", width: 378, height: 160, renderHeight: 40 },
+    { label: "PMP®", sub: "Project Management", src: "/images/standards/pmp.png", width: 162, height: 160, renderHeight: 60 },
 ];
 
 const Companies: React.FC = () => {
@@ -49,12 +51,18 @@ const Companies: React.FC = () => {
                     >
                         {standards.map((standard, index) => (
                             <SwiperSlide key={index}>
-                                <div className="companies-item h-[100px] w-full bg-white shadow-xl px-6 rounded-xl flex items-center gap-3 justify-center cursor-pointer">
-                                    <Icon icon={standard.icon} width="32" height="32" className="text-dark shrink-0" />
-                                    <div className="text-left">
-                                        <p className="font-chakrapetch font-semibold text-15 leading-tight">{standard.label}</p>
-                                        <p className="text-13 text-pera-dark leading-tight">{standard.sub}</p>
-                                    </div>
+                                <div className="companies-item h-[120px] w-full px-4 flex flex-col items-center justify-center gap-3">
+                                    <Image
+                                        src={standard.src}
+                                        alt={standard.label}
+                                        width={standard.width}
+                                        height={standard.height}
+                                        style={{ height: standard.renderHeight }}
+                                        className="standard-logo w-auto max-w-full object-contain"
+                                    />
+                                    <p className="standard-caption text-13 leading-tight text-center">
+                                        {standard.sub}
+                                    </p>
                                 </div>
                             </SwiperSlide>
                         ))}

@@ -9,6 +9,7 @@
   --color-prim: #0d1e20;
   --color-midnight_text: #0c1e21;
   --color-dark: #3866B1;
+  --color-navy: #0f2748;
   --color-prim-light: #edf0f1;
 
   --color-dark-blur: #0d1e20e0;
@@ -224,47 +225,50 @@
   padding: 30px 0px;
 }
 
+/* Edge fades for the marquee. pointer-events:none is required — these sit above
+   the slides, so without it they swallow hover on the logos near the edges. */
 .companies-swiper::before {
   content: "";
   position: absolute;
-  width: 448px;
+  width: 160px;
   height: 100%;
-  background-image: linear-gradient(90deg, rgb(233, 237, 237) 0%, rgba(233, 237, 237, 0) 100%);
+  background-image: linear-gradient(90deg, #edf0f1 0%, rgba(237, 240, 241, 0) 100%);
   top: 0;
   z-index: 2;
+  pointer-events: none;
 }
 
 
 .companies-swiper::after {
   content: "";
   position: absolute;
-  width: 448px;
+  width: 160px;
   height: 100%;
   z-index: 2;
   inset-inline-start: auto;
   inset-inline-end: 0;
-  background-image: linear-gradient(-90deg, rgb(233, 237, 237) 0%, rgba(233, 237, 237, 0) 100%);
+  background-image: linear-gradient(-90deg, #edf0f1 0%, rgba(237, 240, 241, 0) 100%);
   top: 0;
-  z-index: 2;
+  pointer-events: none;
 }
 
 @media screen and (max-width:767px) {
   .companies-swiper::after {
-    width: 200px;
+    width: 90px;
   }
 
   .companies-swiper::before {
-    width: 200px;
+    width: 90px;
   }
 }
 
 @media screen and (max-width:575px) {
   .companies-swiper::after {
-    width: 100px;
+    width: 50px;
   }
 
   .companies-swiper::before {
-    width: 100px;
+    width: 50px;
   }
 }
 
@@ -347,5 +351,152 @@
     left: 0;
     top: 0;
     border-radius: 0;
+  }
+}
+/* "How it works" card — pulled from the back of the stack to the front */
+@keyframes pull-to-front {
+  0% {
+    opacity: 0;
+    transform: translate3d(22px, 20px, 0) scale(0.9) rotate(7deg);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(-1.5deg);
+  }
+}
+
+.card-pull-to-front {
+  animation: pull-to-front 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-pull-to-front {
+    animation: none;
+    transform: rotate(-1.5deg);
+  }
+}
+
+/* "Standards we work with" logos — faint by default, full colour on hover */
+.standard-logo {
+  opacity: 0.55;
+  filter: saturate(0.6);
+  transition: opacity 0.45s ease, filter 0.45s ease, transform 0.45s ease;
+}
+
+.standard-caption {
+  color: #364e5299;
+  transition: color 0.45s ease;
+}
+
+.companies-item:hover .standard-logo {
+  opacity: 1;
+  filter: saturate(1);
+  transform: scale(1.05);
+}
+
+.companies-item:hover .standard-caption {
+  color: #364e52;
+}
+
+/* Hero background carousel: the active image zooms out while it is visible,
+   fades away, and the next one fades in already zoomed in. Duration must stay
+   in step with SLIDE_MS in HeroCarousel.tsx. */
+@keyframes hero-zoom-out {
+  from {
+    transform: scale(1.18);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-slide {
+  opacity: 0;
+  transform: scale(1.18);
+  transition: opacity 1.4s ease-in-out;
+  will-change: opacity, transform;
+}
+
+.hero-slide-active {
+  opacity: 1;
+  animation: hero-zoom-out 7.4s ease-out forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide {
+    transform: none;
+    transition: none;
+  }
+
+  .hero-slide-active {
+    animation: none;
+  }
+}
+
+/* "Our Focus Areas" carousel indicators, rendered below the slides. */
+.focus-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2.75rem;
+}
+
+.focus-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: var(--color-pera-dark);
+  opacity: 0.25;
+  cursor: pointer;
+  transition: width 0.35s ease, opacity 0.35s ease, background-color 0.35s ease;
+}
+
+.focus-dot:hover {
+  opacity: 0.55;
+}
+
+.focus-dot-active {
+  width: 30px;
+  opacity: 1;
+  background: var(--color-dark);
+}
+
+/* Scroll reveal — used by <Reveal>. The visible class is toggled on and off by
+   an IntersectionObserver, so these replay every time a section is scrolled
+   past rather than only on first load. */
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-left {
+  transform: translate3d(-70px, 0, 0);
+}
+
+.reveal-right {
+  transform: translate3d(70px, 0, 0);
+}
+
+.reveal-up {
+  transform: translate3d(0, 45px, 0);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
