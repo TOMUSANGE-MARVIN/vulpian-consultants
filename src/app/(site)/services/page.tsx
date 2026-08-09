@@ -16,7 +16,7 @@ const Page = async () => {
 
     return (
         <>
-            <HeroSub title="Services" description="" breadcrumbLinks={breadcrumbLinks} />
+            <HeroSub title="Services" description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-1.jpg" />
 
             <div className="bg-light py-14 lg:py-18 xl:py-22">
                 <div className="container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) px-4 space-y-14">

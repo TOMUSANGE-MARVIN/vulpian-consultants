@@ -25,7 +25,7 @@ const Page = () => {
 
     return (
         <>
-            <HeroSub title="Blog" description="Explore our latest articles" breadcrumbLinks={breadcrumbLinks} />
+            <HeroSub title="Blog" description="Explore our latest articles" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-2.jpg" />
 
             <div className="bg-light py-14 lg:py-18 xl:py-22">
                 <div className="container flex items-start mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) px-4 gap-5 flex-col lg:flex-row">

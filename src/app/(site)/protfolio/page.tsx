@@ -17,7 +17,7 @@ const Page = () => {
 
     return (
         <>
-            <HeroSub title="Case Studies" description="" breadcrumbLinks={breadcrumbLinks} />
+            <HeroSub title="Case Studies" description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-3.jpg" />
 
             <div className="bg-light py-14 lg:py-18 xl:py-22">
                 <div className="container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) px-4 space-y-6">

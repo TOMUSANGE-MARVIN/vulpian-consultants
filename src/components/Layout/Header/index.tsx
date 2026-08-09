@@ -107,7 +107,7 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] 
                 </div>
                 <nav className="flex flex-col items-start py-4">
                     {headerData.map((item, index) => (
-                        <MobileHeaderLink key={index} item={item} />
+                        <MobileHeaderLink key={index} item={item} onNavigate={() => setNavbarOpen(false)} />
                     ))}
                 </nav>
 

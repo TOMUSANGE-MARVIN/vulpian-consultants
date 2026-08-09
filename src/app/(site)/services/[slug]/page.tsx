@@ -26,7 +26,7 @@ const ServiceDetails = async ({ params }: Props) => {
 
     return (
         <>
-            <HeroSub title={service.title} description="" breadcrumbLinks={breadcrumbLinks} />
+            <HeroSub title={service.title} description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-1.jpg" />
 
             <section className="py-15">
                 <div className="container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) px-4 flex flex-col lg:flex-row gap-5">

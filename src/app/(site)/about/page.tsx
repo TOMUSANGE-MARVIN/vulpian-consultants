@@ -20,7 +20,7 @@ const Page = async () => {
 
     return (
         <>
-            <HeroSub title="About" description="" breadcrumbLinks={breadcrumbLinks} />
+            <HeroSub title="About" description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-3.jpg" />
 
             {/* Who We Are */}
             <div id="who-we-are" className="bg-light overflow-hidden py-14 lg:py-18 xl:py-22 scroll-mt-32">

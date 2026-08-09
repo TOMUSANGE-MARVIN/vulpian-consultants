@@ -15,7 +15,7 @@ const Page = async () => {
 
     return (
         <>
-            <HeroSub title="Team" description="" breadcrumbLinks={breadcrumbLinks} />
+            <HeroSub title="Team" description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-4.jpg" />
             <Team member={lead} />
         </>
     );
