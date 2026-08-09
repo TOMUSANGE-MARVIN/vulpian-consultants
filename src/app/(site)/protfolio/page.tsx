@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import HeroSub from "@/components/SharedComponents/HeroSub";
 import { caseStudyAreas } from "@/lib/staticContent";
+import Videos from "@/components/SharedComponents/Videos";
 
 const Page = () => {
     const breadcrumbLinks = [
@@ -64,6 +65,8 @@ const Page = () => {
                     ))}
                 </div>
             </div>
+
+            <Videos />
         </>
     );
 };

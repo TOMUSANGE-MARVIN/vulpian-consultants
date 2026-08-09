@@ -53,6 +53,19 @@ export const howItWorksFallback = [
     "We deliver, and support your team through implementation",
 ];
 
+export type Video = { id: string; title: string };
+
+// Vulpian Consultants' YouTube channel. Titles fetched from YouTube's oEmbed
+// endpoint, so they match the published videos exactly.
+export const videos: Video[] = [
+    { id: "ml9z3lvt9os", title: "Beyond Compliance: Building a Quality Culture That Empowers Frontline Employee Decision Making" },
+    { id: "OcYkd5g3dos", title: "ISO Audit Preparation — 7 Common Audit Failures and How Enterprise Teams Can Prevent Them" },
+    { id: "xrmqXqq9fvM", title: "Foundations of an ISO 9001 System" },
+    { id: "wso5YSdjCKk", title: "How to Conduct a Risk-Based Internal Audit Using Predictive Decision Trees" },
+    { id: "aV2nxj-_4lg", title: "5 Leadership Traits Every Quality Manager Needs" },
+    { id: "zpNQPm22oWE", title: "The Job Before the Job — A Powerful Message for Every Job Seeker" },
+];
+
 export const focusAreas = [
     {
         category: "Quality",
