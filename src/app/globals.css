@@ -100,7 +100,9 @@
   input[type="email"],
   input[type="tel"],
   select {
-    @apply block outline-hidden text-base font-normal m-0 rounded-[0.375rem] w-full capitalize;
+    /* No text-transform here: it used to capitalise every word the visitor
+       typed, including email addresses. */
+    @apply block outline-hidden text-base font-normal m-0 rounded-[0.375rem] w-full;
   }
 
   h1 {

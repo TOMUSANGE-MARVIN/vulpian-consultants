@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { inputClass, labelClass, helpClass } from "@/app/admin/components/Fields";
+import PasswordInput from "@/app/admin/components/PasswordInput";
 
 export default function AccountPage() {
     const [email, setEmail] = useState("");
@@ -62,27 +63,27 @@ export default function AccountPage() {
             <form onSubmit={submit} className="bg-white rounded-xl border border-gray-200 p-6 space-y-6">
                 <div>
                     <label className={labelClass}>Email address</label>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={inputClass} required autoComplete="username" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={`${inputClass} lowercase`} required autoComplete="username" autoCapitalize="none" autoCorrect="off" spellCheck={false} inputMode="email" />
                     <p className={helpClass}>This is the address you sign in with.</p>
                 </div>
 
                 <div className="border-t border-gray-100 pt-6 space-y-5">
                     <div>
                         <label className={labelClass}>New password</label>
-                        <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} className={inputClass} autoComplete="new-password" placeholder="Leave blank to keep your current one" />
+                        <PasswordInput value={newPassword} onChange={setNewPassword} className={inputClass} autoComplete="new-password" placeholder="Leave blank to keep your current one" />
                         <p className={helpClass}>At least 8 characters. Leave empty if you only want to change your email.</p>
                     </div>
                     {newPassword && (
                         <div>
                             <label className={labelClass}>Confirm new password</label>
-                            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} className={inputClass} autoComplete="new-password" />
+                            <PasswordInput value={confirmPassword} onChange={setConfirmPassword} className={inputClass} autoComplete="new-password" />
                         </div>
                     )}
                 </div>
 
                 <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
                     <label className={labelClass}>Current password</label>
-                    <input type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} className={inputClass} required autoComplete="current-password" />
+                    <PasswordInput value={currentPassword} onChange={setCurrentPassword} className={inputClass} required autoComplete="current-password" />
                     <p className="text-amber-800 text-xs mt-1.5">Required to confirm it&apos;s really you.</p>
                 </div>
 

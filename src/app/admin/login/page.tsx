@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import PasswordInput from "@/app/admin/components/PasswordInput";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -44,21 +45,24 @@ export default function LoginPage() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-prim"
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-prim lowercase"
                         autoComplete="username"
+                        autoCapitalize="none"
+                        autoCorrect="off"
+                        spellCheck={false}
+                        inputMode="email"
                         required
                         autoFocus
                     />
                 </div>
                 <div>
                     <label className="block text-gray-600 text-sm font-medium mb-2">Password</label>
-                    <input
-                        type="password"
+                    <PasswordInput
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-prim"
+                        onChange={setPassword}
                         autoComplete="current-password"
                         required
+                        className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:border-prim"
                     />
                 </div>
                 {error && <p className="text-red-600 text-sm">{error}</p>}
