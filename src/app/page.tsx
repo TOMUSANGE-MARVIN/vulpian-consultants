@@ -9,15 +9,22 @@ import Solution from "@/components/Home/Solution";
 import Team from "@/components/Home/Team";
 import Testimonials from "@/components/Home/Testimonials";
 import Values from "@/components/Home/Values";
-import { getLeadConsultant, getServices, getSiteContent } from "@/lib/cms";
+import {
+  getLeadConsultant, getServices, getSiteContent,
+  getFocusAreas, getStandards, getTestimonials, getPosts,
+} from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [site, services, lead] = await Promise.all([
+  const [site, services, lead, focusAreas, standards, testimonials, posts] = await Promise.all([
     getSiteContent(),
     getServices(),
     getLeadConsultant(),
+    getFocusAreas(),
+    getStandards(),
+    getTestimonials(),
+    getPosts(),
   ]);
 
   return (
@@ -33,13 +40,13 @@ export default async function Home() {
         <Commitment paragraphs={site.whoWeAre.paragraphs} since={site.since} />
         <Values values={site.values} />
         <Solution services={services.slice(0, 8)} />
-        <Companies />
+        <Companies standards={standards} />
         <Process approach={site.approach} />
-        <Projects />
-        <Testimonials />
+        <Projects projects={focusAreas} />
+        <Testimonials testimonials={testimonials} />
         <WhyChooseUs />
         <Team member={lead} compact />
-        <Blog />
+        <Blog blogs={posts.slice(0, 3)} />
       </main>
     </>
   )

@@ -5,7 +5,7 @@ const ADMIN_COOKIE = "vulpian_admin";
 
 export async function middleware(req: NextRequest) {
     const { pathname } = req.nextUrl;
-    const secret = process.env.ADMIN_PASSWORD as string;
+    const secret = (process.env.AUTH_SECRET || process.env.ADMIN_PASSWORD) as string;
     const token = req.cookies.get(ADMIN_COOKIE)?.value;
     const authed = await verifyToken(token, secret);
 
@@ -17,7 +17,10 @@ export async function middleware(req: NextRequest) {
         }
     }
 
-    if (pathname.startsWith("/api/cms") && req.method !== "GET") {
+    // Uploads and every content mutation require a signed-in admin. Media GETs
+    // stay public so images can be served to visitors.
+    const isWrite = req.method !== "GET";
+    if ((pathname.startsWith("/api/cms") || pathname.startsWith("/api/media") || pathname.startsWith("/api/admin/account")) && isWrite) {
         if (!authed) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
@@ -27,5 +30,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/admin/:path*", "/api/cms/:path*"],
+    matcher: ["/admin/:path*", "/api/cms/:path*", "/api/media/:path*", "/api/admin/account"],
 };

@@ -1,4 +1,4 @@
-import { blogs } from "@/lib/staticContent";
+import { getPosts } from "@/lib/cms";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import HeroSub from "@/components/SharedComponents/HeroSub";
@@ -17,6 +17,7 @@ type Props = {
 
 const BlogDetails = async ({ params }: Props) => {
     const { slug } = await params;
+    const blogs = await getPosts();
     const blog = blogs.find((b) => b.slug === slug);
 
     if (!blog) return notFound();
@@ -57,9 +58,9 @@ const BlogDetails = async ({ params }: Props) => {
 
                             <div className="border border-border rounded-lg p-5 bg-prim-light">
                                 <Icon icon="tabler:quote" width="48" height="48" className="mb-3 text-dark" />
-                                <h5 className="text-black font-semibold font-chakrapetch leading-8">{blog.pullQuote.text}</h5>
+                                <h5 className="text-black font-semibold font-chakrapetch leading-8">{blog.quoteText}</h5>
                                 <span className="w-full text-end block font-semibold font-unbounded mt-2">
-                                    - {blog.pullQuote.attribution}
+                                    - {blog.quoteAttribution}
                                 </span>
                             </div>
 
@@ -82,7 +83,7 @@ const BlogDetails = async ({ params }: Props) => {
                             <h4 className="text-black pb-5">More Insights</h4>
                             <div className="flex flex-col gap-4">
                                 {otherPosts.map((post) => (
-                                    <Link key={post.id} href={`/blog/${post.slug}`} className="flex items-center gap-3">
+                                    <Link key={post._id} href={`/blog/${post.slug}`} className="flex items-center gap-3">
                                         <Image
                                             src={post.image}
                                             alt={post.title}

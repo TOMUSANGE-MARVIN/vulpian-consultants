@@ -1,27 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminToken, ADMIN_COOKIE } from "@/lib/auth";
+import { verifyCredentials } from "@/lib/credentials";
 
 export async function POST(req: NextRequest) {
     const { email, password } = await req.json();
 
-    const expectedEmail = process.env.ADMIN_EMAIL;
-    const expectedPassword = process.env.ADMIN_PASSWORD;
-
-    // Same message for either failure, so the response can't be used to probe
-    // which admin email is valid.
-    const invalid = () =>
-        NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-
-    if (!expectedPassword || !password || password !== expectedPassword) {
-        return invalid();
-    }
-
-    // Only enforced when ADMIN_EMAIL is configured, so an existing deployment
-    // that hasn't set it yet keeps working on password alone.
-    if (expectedEmail) {
-        if (!email || String(email).trim().toLowerCase() !== expectedEmail.trim().toLowerCase()) {
-            return invalid();
-        }
+    const ok = await verifyCredentials(String(email || ""), String(password || ""));
+    if (!ok) {
+        // One message for either failure, so the endpoint can't be used to
+        // discover which email is valid.
+        return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
     const token = await createAdminToken();

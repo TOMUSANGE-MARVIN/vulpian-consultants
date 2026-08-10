@@ -6,18 +6,11 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import type { Standard } from "@/lib/cms";
 
-// renderHeight is tuned per logo so they carry similar optical weight -
-// the wide PECB wordmark needs less height than the circular marks.
-const standards = [
-    { label: "ISO 9001:2015", sub: "Quality Management", src: "/images/standards/iso-9001.png", width: 157, height: 160, renderHeight: 58 },
-    { label: "ISO 31000:2018", sub: "Risk Management", src: "/images/standards/iso-31000.png", width: 162, height: 160, renderHeight: 58 },
-    { label: "ISO 19011", sub: "Auditing Guidelines", src: "/images/standards/iso-19011.png", width: 218, height: 160, renderHeight: 52 },
-    { label: "PECB", sub: "Training & Certification", src: "/images/standards/pecb.png", width: 378, height: 160, renderHeight: 40 },
-    { label: "PMP®", sub: "Project Management", src: "/images/standards/pmp.png", width: 162, height: 160, renderHeight: 60 },
-];
 
-const Companies: React.FC = () => {
+const Companies: React.FC<{ standards: Standard[] }> = ({ standards }) => {
+    if (standards.length === 0) return null;
     return (
         <>
             <section className="bg-light overflow-hidden py-14 lg:py-18 xl:py-22 bg-prim-light">
@@ -49,15 +42,15 @@ const Companies: React.FC = () => {
                         }}
                         className="companies-swiper relative"
                     >
-                        {standards.map((standard, index) => (
-                            <SwiperSlide key={index}>
+                        {standards.map((standard) => (
+                            <SwiperSlide key={standard._id}>
                                 <div className="companies-item h-[120px] w-full px-4 flex flex-col items-center justify-center gap-3">
                                     <Image
                                         src={standard.src}
                                         alt={standard.label}
-                                        width={standard.width}
-                                        height={standard.height}
-                                        style={{ height: standard.renderHeight }}
+                                        width={157}
+                                        height={160}
+                                        style={{ height: standard.renderHeight || 54 }}
                                         className="standard-logo w-auto max-w-full object-contain"
                                     />
                                     <p className="standard-caption text-13 leading-tight text-center">

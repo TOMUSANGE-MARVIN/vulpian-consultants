@@ -1,9 +1,12 @@
 import React from "react";
 import { Icon } from "@iconify/react";
-import { videos } from "@/lib/staticContent";
+import { getVideos } from "@/lib/cms";
 import Reveal from "@/components/SharedComponents/Reveal";
 
-const Videos: React.FC = () => {
+const Videos = async () => {
+    const videos = await getVideos();
+    if (videos.length === 0) return null;
+
     return (
         <section className="bg-prim-light overflow-hidden py-14 lg:py-18 xl:py-22">
             <div className="container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) px-4">
@@ -18,13 +21,13 @@ const Videos: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {videos.map((video, i) => (
-                        <Reveal key={video.id} direction="up" delay={(i % 3) * 90} className="w-full">
+                        <Reveal key={video._id} direction="up" delay={(i % 3) * 90} className="w-full">
                             <div className="bg-white rounded-2xl overflow-hidden shadow-[0_2px_12px_rgba(13,30,32,0.06)] hover:shadow-[0_8px_24px_rgba(13,30,32,0.10)] transition duration-500 h-full flex flex-col">
                                 <div className="relative w-full aspect-video bg-prim/5">
                                     <iframe
                                         // nocookie host, and lazy so six embeds don't
                                         // all load up front.
-                                        src={`https://www.youtube-nocookie.com/embed/${video.id}`}
+                                        src={`https://www.youtube-nocookie.com/embed/${video.videoUrl}`}
                                         title={video.title}
                                         loading="lazy"
                                         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

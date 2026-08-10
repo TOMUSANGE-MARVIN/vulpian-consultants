@@ -3,35 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { Icon } from "@iconify/react";
 import Reveal from "@/components/SharedComponents/Reveal";
+import { getReasons, type Reason } from "@/lib/cms";
 
-const reasons = [
-    {
-        icon: "mdi:certificate-outline",
-        title: "Certified Expertise",
-        description:
-            "Led by a PECB Certified Trainer and ISO 9001 Lead Auditor, with credentials spanning ISO 31000 risk management and PMP®.",
-    },
-    {
-        icon: "mdi:tools",
-        title: "Practical, Not Paperwork",
-        description:
-            "We build systems your team actually uses day to day, not documentation that sits on a shelf until the auditor arrives.",
-    },
-    {
-        icon: "mdi:office-building-outline",
-        title: "Public & Private Sector",
-        description:
-            "Experience across government agencies and private organizations since 2019, so recommendations fit how you really operate.",
-    },
-    {
-        icon: "mdi:school-outline",
-        title: "Capability That Stays",
-        description:
-            "Training, internal auditor development, and knowledge transfer, so the system keeps running long after we leave.",
-    },
-];
 
-const Feature: React.FC<{ item: (typeof reasons)[number] }> = ({ item }) => (
+const Feature: React.FC<{ item: Reason }> = ({ item }) => (
     <div className="text-center">
         <Icon icon={item.icon} width="34" height="34" className="text-dark mx-auto mb-4" />
         <h4 className="font-chakrapetch font-semibold text-18 mb-2 normal-case">{item.title}</h4>
@@ -39,7 +14,10 @@ const Feature: React.FC<{ item: (typeof reasons)[number] }> = ({ item }) => (
     </div>
 );
 
-const WhyChooseUs = () => {
+const WhyChooseUs = async () => {
+    const reasons = await getReasons();
+    if (reasons.length === 0) return null;
+
     return (
         <section className="overflow-hidden py-14 lg:py-18 xl:py-22 bg-prim-light">
             <div className="container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) px-4">
@@ -57,8 +35,9 @@ const WhyChooseUs = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-10 lg:gap-8 items-center">
                     {/* left column */}
                     <div className="space-y-12 order-2 lg:order-1">
-                        <Reveal direction="left"><Feature item={reasons[0]} /></Reveal>
-                        <Reveal direction="left" delay={120}><Feature item={reasons[1]} /></Reveal>
+                        {reasons.slice(0, 2).map((r, i) => (
+                            <Reveal key={r._id} direction="left" delay={i * 120}><Feature item={r} /></Reveal>
+                        ))}
                     </div>
 
                     {/* centre image, with the offset accent panel behind it */}
@@ -81,8 +60,9 @@ const WhyChooseUs = () => {
 
                     {/* right column */}
                     <div className="space-y-12 order-3">
-                        <Reveal direction="right"><Feature item={reasons[2]} /></Reveal>
-                        <Reveal direction="right" delay={120}><Feature item={reasons[3]} /></Reveal>
+                        {reasons.slice(2, 4).map((r, i) => (
+                            <Reveal key={r._id} direction="right" delay={i * 120}><Feature item={r} /></Reveal>
+                        ))}
                     </div>
                 </div>
 

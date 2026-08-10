@@ -6,9 +6,10 @@ import Reveal from '@/components/SharedComponents/Reveal';
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
-import { testimonials } from '@/lib/staticContent';
+import type { Testimonial } from "@/lib/cms";
 
-const Testimonials: React.FC = () => {
+const Testimonials: React.FC<{ testimonials: Testimonial[] }> = ({ testimonials }) => {
+    if (testimonials.length === 0) return null;
     return (
         <>
             <section className=" overflow-hidden py-14 lg:py-18 xl:py-22 bg-prim-light">
@@ -34,7 +35,7 @@ const Testimonials: React.FC = () => {
                             autoplay={{ delay: 5000, disableOnInteraction: false }}
                         >
                             {testimonials.map((item) => (
-                                <SwiperSlide key={item.id} className='w-full h-full'>
+                                <SwiperSlide key={item._id} className='w-full h-full'>
                                     <div className="testimonials-content w-full bg-white shadow-lg p-8 rounded-2xl flex flex-col justify-center items-start h-full">
                                         <Icon icon="iconoir:quote-solid" width={90} height={90} className='text-dark mb-5' />
                                         <p className='text-pera-dark text-16 leading-7 md:text-22 md:leading-8 pb-8 border-b-2 border-dashed'>

@@ -2,9 +2,10 @@ import { Icon } from '@iconify/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { blogs } from '@/lib/staticContent';
+import type { Post } from "@/lib/cms";
 
-const Blog: React.FC = () => {
+const Blog: React.FC<{ blogs: Post[] }> = ({ blogs }) => {
+    if (blogs.length === 0) return null;
     return (
         <>
             <section className="bg-light overflow-hidden py-14 lg:py-18 xl:py-22 bg-prim-light">
@@ -19,7 +20,7 @@ const Blog: React.FC = () => {
                     <div className="blog-wrapper grid lg:grid-cols-2 gap-5">
                         {blogs.slice(0, 1).map((item) => (
                             <div
-                                key={item.id}
+                                key={item._id}
                                 className="blog-item w-full shadow-lg bg-white p-5 rounded-2xl group h-auto md:h-[640px]"
                             >
                                 <div className="blog-image w-full rounded-2xl overflow-hidden relative">
@@ -58,7 +59,7 @@ const Blog: React.FC = () => {
 
                             {blogs.slice(1).map((item) => (
                                 <div
-                                    key={item.id}
+                                    key={item._id}
                                     className="blog-item h-auto md:h-[310px] w-full flex flex-wrap md:flex-nowrap shadow-lg bg-white p-5 rounded-2xl group"
                                 >
                                     <div className="blog-image w-full rounded-2xl overflow-hidden relative">

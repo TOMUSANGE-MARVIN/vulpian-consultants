@@ -10,9 +10,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 
-import { focusAreas as projects } from "@/lib/staticContent";
+import type { FocusArea } from "@/lib/cms";
 
-const Projects: React.FC = () => {
+const Projects: React.FC<{ projects: FocusArea[] }> = ({ projects }) => {
     const swiperRef = useRef<SwiperClass | null>(null);
     const [active, setActive] = useState(0);
 

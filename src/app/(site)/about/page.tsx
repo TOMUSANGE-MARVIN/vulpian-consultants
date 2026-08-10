@@ -5,12 +5,12 @@ import { Icon } from "@iconify/react";
 import Team from "@/components/Home/Team";
 import Process from "@/components/Home/Process";
 import Companies from "@/components/Home/Companies";
-import { getLeadConsultant, getSiteContent } from "@/lib/cms";
+import { getLeadConsultant, getSiteContent, getStandards } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
 const Page = async () => {
-    const [site, lead] = await Promise.all([getSiteContent(), getLeadConsultant()]);
+    const [site, lead, standards] = await Promise.all([getSiteContent(), getLeadConsultant(), getStandards()]);
 
     const breadcrumbLinks = [
         { href: "/", text: "Home" },
@@ -108,7 +108,7 @@ const Page = async () => {
 
             <Process approach={site.approach} />
 
-            <Companies />
+            <Companies standards={standards} />
             <Team member={lead} />
         </>
     );

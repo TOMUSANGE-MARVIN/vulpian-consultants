@@ -84,6 +84,55 @@ export async function getTeam(): Promise<TeamMember[]> {
 
 export async function getLeadConsultant(): Promise<TeamMember | null> {
     await dbConnect();
-    const doc = await TeamMemberModel.findOne({ isLead: true }).lean();
+    // Falls back to the first member by order, so someone added from the admin
+    // still appears even though the admin has no "is lead" switch.
+    const doc =
+        (await TeamMemberModel.findOne({ isLead: true }).lean()) ??
+        (await TeamMemberModel.findOne({}).sort({ order: 1 }).lean());
     return doc ? serialize<TeamMember>(doc) : null;
+}
+
+/* ---------------------------------------------------------------------------
+ * Editable sections. Each returns [] when the database is unreachable so a
+ * blip degrades a section rather than breaking the page.
+ * ------------------------------------------------------------------------- */
+
+import { getModel } from "@/models/dynamic";
+
+export type FocusArea = { _id: string; category: string; title: string; description: string; image: string; link: string };
+export type Reason = { _id: string; icon: string; title: string; description: string };
+export type Standard = { _id: string; label: string; sub: string; src: string; renderHeight: number };
+export type Testimonial = { _id: string; text: string; position: string };
+export type Faq = { _id: string; question: string; answer: string };
+export type VideoItem = { _id: string; videoUrl: string; title: string };
+export type Post = {
+    _id: string; title: string; slug: string; category: string; author: string; date: string;
+    image: string; description: string; body: string[]; takeaways: string[];
+    quoteText?: string; quoteAttribution?: string;
+};
+
+async function listOf<T>(name: string): Promise<T[]> {
+    try {
+        await dbConnect();
+        const Model = getModel(name);
+        if (!Model) return [];
+        const docs = await Model.find({}).sort({ order: 1, createdAt: 1 }).lean();
+        return serialize<T[]>(docs);
+    } catch (err) {
+        console.error(`Could not load "${name}" from the CMS:`, err);
+        return [];
+    }
+}
+
+export const getFocusAreas = () => listOf<FocusArea>("focusareas");
+export const getReasons = () => listOf<Reason>("reasons");
+export const getStandards = () => listOf<Standard>("standards");
+export const getTestimonials = () => listOf<Testimonial>("testimonials");
+export const getFaqs = () => listOf<Faq>("faqs");
+export const getVideos = () => listOf<VideoItem>("videos");
+export const getPosts = () => listOf<Post>("blogs");
+
+export async function getPostBySlug(slug: string): Promise<Post | null> {
+    const posts = await getPosts();
+    return posts.find((p) => p.slug === slug) ?? null;
 }
