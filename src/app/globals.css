@@ -499,3 +499,9 @@
     transition: none;
   }
 }
+
+/* Hero brand wordmark — a soft shadow keeps it readable over the
+   carousel photos, which vary in brightness between slides. */
+.hero-brand {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}

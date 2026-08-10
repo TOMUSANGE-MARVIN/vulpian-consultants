@@ -28,9 +28,14 @@ const Hero: React.FC<HeroProps> = ({ title, quote, ctaText, ctaHref, since }) =>
                 <div className='container mx-auto lg:max-w-(--breakpoint-xl) md:max-w-(--breakpoint-md) z-20 relative text-white px-4 h-full flex flex-col justify-center items-start'>
                     <div className="hero-content text-white">
                         <span className='sub-title text-14 bg-prim text-white py-1 rounded-xl relative font-chakrapetch capitalize ps-5 pe-3 mb-5 inline-block'>
-                            Vulpian Consultants &middot; Since {since}
+                            Since {since}
                         </span>
-                        <h2 className='md:text-60 sm:text-40 text-28 text-white mb-9 lg:mb-3 w-full lg:w-3/4'>
+                        {/* The company name is the hero's dominant element, and the
+                            page's only h1. The CMS hero title sits under it. */}
+                        <h1 className='hero-brand font-unbounded font-bold text-white normal-case tracking-[-0.02em] leading-[1.05] text-35 sm:text-50 md:text-60 xl:text-[5.25rem] mb-4'>
+                            Vulpian Consultants
+                        </h1>
+                        <h2 className='font-chakrapetch font-medium text-white/90 normal-case tracking-wide text-20 sm:text-25 md:text-35 mb-9 lg:mb-8 w-full lg:w-3/4'>
                             {title}
                         </h2>
                         <Link
