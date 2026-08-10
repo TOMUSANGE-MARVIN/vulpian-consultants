@@ -118,43 +118,6 @@ export const testimonials = [
     },
 ];
 
-export const engagementOptions = [
-    {
-        name: "Assessment & Diagnostic",
-        description: "A focused starting point for organizations that need clarity before committing to a full programme.",
-        features: [
-            "ISO 9001 readiness assessment",
-            "Gap analysis against current processes",
-            "Findings report with prioritized recommendations",
-            "One follow-up consultation session",
-        ],
-        highlighted: false,
-    },
-    {
-        name: "Implementation Partner",
-        description: "End-to-end support to design, document, and embed a management system that actually gets used.",
-        features: [
-            "Everything in Assessment & Diagnostic",
-            "QMS design and documentation (manuals, SOPs, SLAs)",
-            "Internal audit and management review facilitation",
-            "Staff training on the new system",
-            "Certification-readiness support",
-        ],
-        highlighted: true,
-    },
-    {
-        name: "Ongoing Retainer",
-        description: "Continued advisory support once your system is live, so improvement doesn't stop at certification.",
-        features: [
-            "Everything in Implementation Partner",
-            "Scheduled internal audits and reviews",
-            "Priority access to the lead consultant",
-            "Quarterly performance and risk reviews",
-        ],
-        highlighted: false,
-    },
-];
-
 export type BlogPost = {
     id: number;
     slug: string;
