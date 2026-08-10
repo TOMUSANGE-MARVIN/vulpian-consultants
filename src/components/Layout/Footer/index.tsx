@@ -100,7 +100,7 @@ const Footer = async () => {
                             <Logo variant="white" />
                         </div>
                         <p className="text-[14px] leading-6 text-white/70 max-w-md">
-                            {site.tagline} — a professional consulting firm helping organizations achieve
+                            {site.tagline} - a professional consulting firm helping organizations achieve
                             operational excellence through Quality Management Systems, organizational
                             transformation, and business performance improvement. Since {site.since}.
                         </p>

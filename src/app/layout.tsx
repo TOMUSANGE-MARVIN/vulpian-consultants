@@ -31,7 +31,7 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: "Vulpian Consultants — Empowering Excellence",
+  title: "Vulpian Consultants - Empowering Excellence",
   description:
     "Vulpian Consultants is a professional consulting firm helping organizations achieve operational excellence through Quality Management Systems (QMS), organizational transformation, and business performance improvement.",
 };
@@ -41,8 +41,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // The nav's Services submenu comes from the CMS, but the whole site —
-  // including /admin/login — must not 500 when the database is unreachable.
+  // The nav's Services submenu comes from the CMS, but the whole site -
+  // including /admin/login - must not 500 when the database is unreachable.
   let serviceLinks: { label: string; href: string }[] = [];
   try {
     const services = await getServices();

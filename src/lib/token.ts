@@ -1,5 +1,5 @@
 // Minimal HMAC-signed session token using Web Crypto (SubtleCrypto),
-// which works in both the Node.js and Edge runtimes — unlike `jsonwebtoken`,
+// which works in both the Node.js and Edge runtimes - unlike `jsonwebtoken`,
 // so the same code runs in middleware and in route handlers.
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;

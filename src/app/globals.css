@@ -225,7 +225,7 @@
   padding: 30px 0px;
 }
 
-/* Edge fades for the marquee. pointer-events:none is required — these sit above
+/* Edge fades for the marquee. pointer-events:none is required - these sit above
    the slides, so without it they swallow hover on the logos near the edges. */
 .companies-swiper::before {
   content: "";
@@ -352,7 +352,7 @@
     border-radius: 0;
   }
 }
-/* "How it works" card — pulled from the back of the stack to the front */
+/* "How it works" card - pulled from the back of the stack to the front */
 @keyframes pull-to-front {
   0% {
     opacity: 0;
@@ -378,7 +378,7 @@
   }
 }
 
-/* "Standards we work with" logos — faint by default, full colour on hover */
+/* "Standards we work with" logos - faint by default, full colour on hover */
 .standard-logo {
   opacity: 0.55;
   filter: saturate(0.6);
@@ -464,7 +464,7 @@
   background: var(--color-dark);
 }
 
-/* Scroll reveal — used by <Reveal>. The visible class is toggled on and off by
+/* Scroll reveal - used by <Reveal>. The visible class is toggled on and off by
    an IntersectionObserver, so these replay every time a section is scrolled
    past rather than only on first load. */
 .reveal {
@@ -500,7 +500,7 @@
   }
 }
 
-/* Hero brand wordmark — a soft shadow keeps it readable over the
+/* Hero brand wordmark - a soft shadow keeps it readable over the
    carousel photos, which vary in brightness between slides. */
 .hero-brand {
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);

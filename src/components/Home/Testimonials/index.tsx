@@ -19,7 +19,7 @@ const Testimonials: React.FC = () => {
                             <div className='absolute top-0 left-0 w-full h-full bg-black/15'></div>
                             <div className="rating-box absolute right-5 bottom-5 bg-dark text-white h-[150px] max-w-2xl w-[200px] flex flex-col justify-between items-start p-3 rounded-2xl">
                                 <Icon icon="iconoir:quote-solid" width="40" height="40" className="text-white/80" />
-                                <p className="text-sm leading-snug">Illustrative feedback based on our engagement approach — real client quotes coming soon.</p>
+                                <p className="text-sm leading-snug">Illustrative feedback based on our engagement approach - real client quotes coming soon.</p>
                             </div>
 
                             <h4 className='absolute text-white'>What Clients Value.</h4>

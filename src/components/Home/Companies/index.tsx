@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// renderHeight is tuned per logo so they carry similar optical weight —
+// renderHeight is tuned per logo so they carry similar optical weight -
 // the wide PECB wordmark needs less height than the circular marks.
 const standards = [
     { label: "ISO 9001:2015", sub: "Quality Management", src: "/images/standards/iso-9001.png", width: 157, height: 160, renderHeight: 58 },

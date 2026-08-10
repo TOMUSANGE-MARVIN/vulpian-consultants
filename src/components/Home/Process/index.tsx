@@ -79,7 +79,7 @@ const Process: React.FC<ProcessProps> = ({ approach }) => {
                         </ol>
                         </Reveal>
 
-                        {/* divider ticks — the active stage is accented */}
+                        {/* divider ticks - the active stage is accented */}
                         <div className="hidden lg:flex flex-col gap-2 pt-2" aria-hidden>
                             {approach.map((_, index) => (
                                 <span

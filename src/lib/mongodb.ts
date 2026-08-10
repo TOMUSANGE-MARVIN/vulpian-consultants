@@ -37,7 +37,7 @@ export async function dbConnect() {
         cache.conn = await cache.promise;
     } catch (err) {
         // Drop the failed promise, otherwise every later call awaits the same
-        // rejected one and the process never reconnects — even once the network
+        // rejected one and the process never reconnects - even once the network
         // or the Atlas IP allow-list is fixed.
         cache.promise = null;
         cache.conn = null;

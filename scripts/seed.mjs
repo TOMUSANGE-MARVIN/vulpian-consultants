@@ -34,7 +34,7 @@ const siteContent = {
             "Vulpian Consultants is a professional consulting firm committed to helping organizations achieve operational excellence through effective Quality Management Systems (QMS), organizational transformation, and business performance improvement.",
             "We partner with public and private sector organizations to design, implement, maintain, and continually improve management systems that enhance efficiency, ensure regulatory compliance, and deliver sustainable results. Our core expertise lies in Quality Management Systems (QMS), supported by complementary services in Information and Communication Technology (ICT), Finance Management, Business Process Improvement, Risk Management, Organizational Development, and Management Operations.",
             "Our team of experienced consultants combines technical expertise with practical industry knowledge to deliver tailored solutions that strengthen governance, optimize processes, empower people, and improve organizational performance across the entire business lifecycle.",
-            "At Vulpian Consultants, we believe that quality is not just about compliance — it is about creating a culture of excellence, innovation, and continual improvement. We are committed to helping our clients build resilient organizations that deliver value to customers, stakeholders, and society.",
+            "At Vulpian Consultants, we believe that quality is not just about compliance - it is about creating a culture of excellence, innovation, and continual improvement. We are committed to helping our clients build resilient organizations that deliver value to customers, stakeholders, and society.",
         ],
     },
     values: [

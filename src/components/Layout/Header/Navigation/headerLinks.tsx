@@ -7,7 +7,7 @@ import { Icon } from '@iconify/react'
 const HeaderLinks: React.FC<{ item: HeaderItem; scrolled?: boolean }> = ({ item, scrolled }) => {
     const path = usePathname();
 
-    // Long lists (the Services menu) need two columns — a single 240px column
+    // Long lists (the Services menu) need two columns - a single 240px column
     // of 14 long titles runs off the bottom of the viewport.
     const isWide = (item.submenu?.length ?? 0) > 6;
 

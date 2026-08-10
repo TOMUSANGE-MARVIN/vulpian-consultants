@@ -10,7 +10,7 @@ type RevealProps = {
     direction?: Direction;
     /** Stagger, in ms. */
     delay?: number;
-    /** Layout classes belong here, not on an inner wrapper — this element IS
+    /** Layout classes belong here, not on an inner wrapper - this element IS
      *  the flex/grid child, so widths must live on it. */
     className?: string;
 };

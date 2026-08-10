@@ -49,7 +49,7 @@ const WhyChooseUs = () => {
                     </h2>
                     <p className="text-pera-dark max-w-xl mx-auto mt-4 leading-7">
                         From quality management systems to risk, training and process
-                        improvement — practical consulting that leaves your organization
+                        improvement - practical consulting that leaves your organization
                         stronger than we found it.
                     </p>
                 </div>

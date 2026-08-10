@@ -40,7 +40,7 @@ node scripts/seed.mjs
 ```
 
 Seeds the database with the initial site content, 14 services, and the lead
-consultant profile. Running it again overwrites existing content — use with
+consultant profile. Running it again overwrites existing content - use with
 care against a live database.
 
 ## Deployment

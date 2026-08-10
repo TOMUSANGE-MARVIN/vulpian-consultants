@@ -59,7 +59,7 @@ const BlogDetails = async ({ params }: Props) => {
                                 <Icon icon="tabler:quote" width="48" height="48" className="mb-3 text-dark" />
                                 <h5 className="text-black font-semibold font-chakrapetch leading-8">{blog.pullQuote.text}</h5>
                                 <span className="w-full text-end block font-semibold font-unbounded mt-2">
-                                    — {blog.pullQuote.attribution}
+                                    - {blog.pullQuote.attribution}
                                 </span>
                             </div>
 
