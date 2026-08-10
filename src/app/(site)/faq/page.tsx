@@ -2,7 +2,15 @@ import React from "react";
 import Image from "next/image";
 import HeroSub from "@/components/SharedComponents/HeroSub";
 import { getFaqs } from "@/lib/cms";
+import { pageMetadata, faqSchema, JsonLd } from "@/lib/seo";
 import FaqList from "./FaqList";
+
+export const metadata = pageMetadata({
+    title: "Frequently Asked Questions",
+    description: "Answers to common questions about ISO 9001 certification, quality management systems, timelines, and how Vulpian Consultants works with clients.",
+    path: "/faq",
+    image: "/images/hero/hero-5.jpg",
+});
 
 export const dynamic = "force-dynamic";
 
@@ -15,6 +23,7 @@ const Page = async () => {
 
     return (
         <>
+            <JsonLd data={faqSchema(faqs)} />
             <HeroSub title="Faq" description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-5.jpg" />
 
             <div className="bg-light overflow-hidden py-14 lg:py-18 xl:py-22">

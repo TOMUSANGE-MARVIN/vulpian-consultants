@@ -2,6 +2,14 @@ import React from "react";
 import HeroSub from "@/components/SharedComponents/HeroSub";
 import { getPosts } from "@/lib/cms";
 import BlogBrowser from "./BlogBrowser";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+    title: "Blog",
+    description: "Practical articles on ISO 9001, quality culture, risk-based thinking and continual improvement from Vulpian Consultants.",
+    path: "/blog",
+    image: "/images/hero/hero-2.jpg",
+});
 
 export const dynamic = "force-dynamic";
 

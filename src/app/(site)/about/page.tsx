@@ -6,6 +6,14 @@ import Team from "@/components/Home/Team";
 import Process from "@/components/Home/Process";
 import Companies from "@/components/Home/Companies";
 import { getLeadConsultant, getSiteContent, getStandards } from "@/lib/cms";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+    title: "About Us",
+    description: "Vulpian Consultants is a Ugandan consulting firm specialising in Quality Management Systems, risk management and organizational development. Serving public and private sector clients since 2019.",
+    path: "/about",
+    image: "/images/hero/hero-3.jpg",
+});
 
 export const dynamic = "force-dynamic";
 

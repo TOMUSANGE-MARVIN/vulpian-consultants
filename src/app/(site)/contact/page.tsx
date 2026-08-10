@@ -2,6 +2,14 @@ import React from "react";
 import HeroSub from "@/components/SharedComponents/HeroSub";
 import { Icon } from "@iconify/react";
 import { getServices, getSiteContent } from "@/lib/cms";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+    title: "Contact Us",
+    description: "Talk to Vulpian Consultants about ISO 9001 certification, quality management systems, internal audit training or risk management. Based in Kampala, Uganda.",
+    path: "/contact",
+    image: "/images/hero/hero-5.jpg",
+});
 
 export const dynamic = "force-dynamic";
 

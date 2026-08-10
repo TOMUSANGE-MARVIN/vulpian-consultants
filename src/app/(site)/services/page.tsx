@@ -3,6 +3,14 @@ import HeroSub from "@/components/SharedComponents/HeroSub";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 import { getServices } from "@/lib/cms";
+import { pageMetadata } from "@/lib/seo";
+
+export const metadata = pageMetadata({
+    title: "Our Services",
+    description: "QMS and ISO 9001 consulting, risk management, business process improvement, corporate training, leadership development and advisory services for organizations across Uganda.",
+    path: "/services",
+    image: "/images/hero/hero-1.jpg",
+});
 
 export const dynamic = "force-dynamic";
 

@@ -1,4 +1,5 @@
-import { getPosts } from "@/lib/cms";
+import { getPosts, getPostBySlug } from "@/lib/cms";
+import { pageMetadata, articleSchema, breadcrumbSchema, JsonLd } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import HeroSub from "@/components/SharedComponents/HeroSub";
@@ -7,9 +8,28 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { Icon } from "@iconify/react";
 
-export const metadata: Metadata = {
-    title: "Blog | Vulpian Consultants",
-};
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { slug } = await params;
+    const post = await getPostBySlug(slug);
+    if (!post) return { title: "Post not found" };
+
+    return pageMetadata({
+        title: post.metaTitle?.trim() || post.title,
+        description: post.metaDescription?.trim() || post.description,
+        path: `/blog/${post.slug}`,
+        image: post.image,
+        keywords: post.keywords,
+        type: "article",
+        publishedTime: post.createdAt,
+        modifiedTime: post.updatedAt,
+    });
+}
+
+/** Pre-renders a page per post so search engines get static HTML. */
+export async function generateStaticParams() {
+    const posts = await getPosts();
+    return posts.map((p) => ({ slug: p.slug }));
+}
 
 type Props = {
     params: Promise<{ slug: string }>;
@@ -25,6 +45,21 @@ const BlogDetails = async ({ params }: Props) => {
     const otherPosts = blogs.filter((b) => b.slug !== slug);
     const categories = Array.from(new Set(blogs.map((b) => b.category)));
 
+    const jsonLd = articleSchema({
+        title: blog.title,
+        description: blog.metaDescription?.trim() || blog.description,
+        image: blog.image,
+        slug: blog.slug,
+        author: blog.author,
+        published: blog.createdAt,
+        modified: blog.updatedAt,
+    });
+    const crumbs = breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Blog", path: "/blog" },
+        { name: blog.title, path: `/blog/${blog.slug}` },
+    ]);
+
     const breadcrumbLinks = [
         { href: "/", text: "Home" },
         { href: "/blog", text: "Blog Details" },
@@ -32,6 +67,8 @@ const BlogDetails = async ({ params }: Props) => {
 
     return (
         <>
+            <JsonLd data={jsonLd} />
+            <JsonLd data={crumbs} />
             <HeroSub title={blog.title} description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-2.jpg" />
 
             <section className="py-15">

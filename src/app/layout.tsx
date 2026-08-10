@@ -4,7 +4,8 @@ import { Chakra_Petch, Poppins, Unbounded, Mona_Sans } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Layout/Footer";
 import ConditionalChrome from "@/components/Layout/ConditionalChrome";
-import { getServices } from "@/lib/cms";
+import { getServices, getSiteContent } from "@/lib/cms";
+import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, organizationSchema, websiteSchema, JsonLd } from "@/lib/seo";
 
 const chakraPetch = Chakra_Petch({
   variable: "--font-chakrapetch",
@@ -31,9 +32,48 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  title: "Vulpian Consultants - Empowering Excellence",
-  description:
-    "Vulpian Consultants is a professional consulting firm helping organizations achieve operational excellence through Quality Management Systems (QMS), organizational transformation, and business performance improvement.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    // Every page supplies its own title; this appends the brand automatically.
+    default: `${SITE_NAME} - ISO 9001 & Quality Management Consulting in Uganda`,
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  keywords: [
+    "ISO 9001 consulting Uganda",
+    "quality management systems",
+    "QMS consulting",
+    "internal audit training",
+    "ISO 31000 risk management",
+    "business process improvement",
+    "corporate training Uganda",
+    "management systems certification",
+  ],
+  alternates: { canonical: SITE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_US",
+    url: SITE_URL,
+    title: `${SITE_NAME} - ISO 9001 & Quality Management Consulting`,
+    description: DEFAULT_DESCRIPTION,
+    images: [{ url: "/images/hero/hero-1.jpg", width: 1200, height: 630, alt: SITE_NAME }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${SITE_NAME} - ISO 9001 & Quality Management Consulting`,
+    description: DEFAULT_DESCRIPTION,
+    images: ["/images/hero/hero-1.jpg"],
+  },
 };
 
 export default async function RootLayout({
@@ -44,8 +84,20 @@ export default async function RootLayout({
   // The nav's Services submenu comes from the CMS, but the whole site -
   // including /admin/login - must not 500 when the database is unreachable.
   let serviceLinks: { label: string; href: string }[] = [];
+  let orgJson: unknown = null;
   try {
-    const services = await getServices();
+    const [services, site] = await Promise.all([getServices(), getSiteContent()]);
+    orgJson = organizationSchema({
+      description: DEFAULT_DESCRIPTION,
+      logo: site.logoUrl || "/images/logo/vulpian-logo-color.png",
+      phones: site.contact?.phones ?? [],
+      emails: site.contact?.emails ?? [],
+      address: site.contact?.address ?? "Kampala, Uganda",
+      sameAs: [
+        site.contact?.linkedin ? `https://www.linkedin.com/company/${site.contact.linkedin.replace(/\s+/g, "-").toLowerCase()}` : "",
+        "https://www.youtube.com/@Vulpian-Consultants",
+      ],
+    });
     serviceLinks = services.map((service) => ({
       label: service.title,
       href: `/services/${service.slug}`,
@@ -59,6 +111,8 @@ export default async function RootLayout({
       <body
         className={`${chakraPetch.variable} ${mona.variable} ${poppins.variable} ${unbounded.variable}`}
       >
+        {orgJson ? <JsonLd data={orgJson} /> : null}
+        <JsonLd data={websiteSchema()} />
         <ConditionalChrome footer={<Footer />} serviceLinks={serviceLinks}>
           {children}
         </ConditionalChrome>

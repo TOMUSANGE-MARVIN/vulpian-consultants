@@ -4,6 +4,19 @@ import HeroSub from "@/components/SharedComponents/HeroSub";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { getServiceBySlug, getServices } from "@/lib/cms";
+import type { Metadata } from "next";
+import { pageMetadata, serviceSchema, breadcrumbSchema, JsonLd } from "@/lib/seo";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const service = await getServiceBySlug(slug);
+    if (!service) return { title: "Service not found" };
+    return pageMetadata({
+        title: service.title,
+        description: service.summary,
+        path: `/services/${service.slug}`,
+    });
+}
 
 export const dynamic = "force-dynamic";
 
@@ -24,8 +37,17 @@ const ServiceDetails = async ({ params }: Props) => {
         { href: "/services", text: "Service Details" },
     ];
 
+    const jsonLd = serviceSchema({ title: service.title, summary: service.summary, slug: service.slug });
+    const crumbs = breadcrumbSchema([
+        { name: "Home", path: "/" },
+        { name: "Services", path: "/services" },
+        { name: service.title, path: `/services/${service.slug}` },
+    ]);
+
     return (
         <>
+            <JsonLd data={jsonLd} />
+            <JsonLd data={crumbs} />
             <HeroSub title={service.title} description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-1.jpg" />
 
             <section className="py-15">

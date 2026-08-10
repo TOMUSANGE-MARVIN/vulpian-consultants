@@ -181,6 +181,9 @@ export const collections: Collection[] = [
             { name: "takeaways", label: "Key takeaways", type: "list" },
             { name: "quoteText", label: "Pull quote", type: "textarea", help: "Optional highlighted quote." },
             { name: "quoteAttribution", label: "Quote credit", type: "text" },
+            { name: "metaTitle", label: "SEO title", type: "text", help: "What Google shows as the heading. Aim for under 60 characters. Leave blank to use the post title." },
+            { name: "metaDescription", label: "SEO description", type: "textarea", help: "The grey text under the title in Google results. Aim for 150-160 characters. Leave blank to use the summary." },
+            { name: "keywords", label: "Keywords", type: "list", help: "Words people might search for to find this post." },
         ],
     },
 ];

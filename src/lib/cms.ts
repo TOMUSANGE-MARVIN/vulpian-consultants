@@ -109,6 +109,8 @@ export type Post = {
     _id: string; title: string; slug: string; category: string; author: string; date: string;
     image: string; description: string; body: string[]; takeaways: string[];
     quoteText?: string; quoteAttribution?: string;
+    metaTitle?: string; metaDescription?: string; keywords?: string[];
+    createdAt?: string; updatedAt?: string;
 };
 
 async function listOf<T>(name: string): Promise<T[]> {
