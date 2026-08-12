@@ -35,7 +35,7 @@ const Footer = async () => {
                             rel="noopener"
                             className="text-white/90 hover:text-white underline underline-offset-2 transition-colors"
                         >
-                            marvwebdesign.com
+                            marvwebdesign
                         </a>
                     </p>
                 </div>
@@ -174,7 +174,7 @@ const Footer = async () => {
                             rel="noopener"
                             className="text-white/90 hover:text-white underline underline-offset-2 transition-colors"
                         >
-                            marvwebdesign.com
+                            marvwebdesign
                         </a>
                     </p>
                 </div>
