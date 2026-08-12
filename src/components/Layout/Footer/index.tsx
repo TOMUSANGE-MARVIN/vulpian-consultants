@@ -27,6 +27,17 @@ const Footer = async () => {
                     <p className="text-[15px] text-white/70">
                         © {new Date().getFullYear()} Vulpian Consultants. All rights reserved.
                     </p>
+                    <p className="text-[15px] text-white/70">
+                        Designed by{" "}
+                        <a
+                            href="https://marvwebdesign.com"
+                            target="_blank"
+                            rel="noopener"
+                            className="text-white/90 hover:text-white underline underline-offset-2 transition-colors"
+                        >
+                            marvwebdesign.com
+                        </a>
+                    </p>
                 </div>
             </footer>
         );
@@ -154,6 +165,17 @@ const Footer = async () => {
                 <div className="flex flex-col sm:flex-row justify-between items-center border-t border-white/15 mt-10 pt-6 text-center sm:text-left">
                     <p className="text-[15px] text-white/70 mb-3 sm:mb-0">
                         © {new Date().getFullYear()} {site.companyName}. All rights reserved.
+                    </p>
+                    <p className="text-[15px] text-white/70">
+                        Designed by{" "}
+                        <a
+                            href="https://marvwebdesign.com"
+                            target="_blank"
+                            rel="noopener"
+                            className="text-white/90 hover:text-white underline underline-offset-2 transition-colors"
+                        >
+                            marvwebdesign.com
+                        </a>
                     </p>
                 </div>
             </div>

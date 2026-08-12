@@ -3,6 +3,7 @@ import HeroSub from "@/components/SharedComponents/HeroSub";
 import { Icon } from "@iconify/react";
 import { getServices, getSiteContent } from "@/lib/cms";
 import { pageMetadata } from "@/lib/seo";
+import ContactForm from "./ContactForm";
 
 export const metadata = pageMetadata({
     title: "Contact Us",
@@ -98,43 +99,7 @@ const Page = async () => {
                                 Feel Free to Get in Touch
                             </h2>
 
-                            <form className="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <label className="block text-gray-600 font-medium mb-2">Full Name *</label>
-                                    <input type="text" placeholder="Enter your name" className="w-full border-b border-gray-300 focus:border-teal-500 focus:outline-none py-2" required />
-                                </div>
-
-                                <div>
-                                    <label className="block text-gray-600 font-medium mb-2">Email Address *</label>
-                                    <input type="email" placeholder="Enter your email" className="w-full border-b border-gray-300 focus:border-teal-500 focus:outline-none py-2" required />
-                                </div>
-
-                                <div>
-                                    <label className="block text-gray-600 font-medium mb-2">Phone number *</label>
-                                    <input type="tel" placeholder="Enter your phone" className="w-full border-b border-gray-300 focus:border-teal-500 focus:outline-none py-2" required />
-                                </div>
-
-                                <div>
-                                    <label className="block text-gray-600 font-medium mb-2">Service of Interest</label>
-                                    <select className="w-full border-b border-gray-300 focus:border-teal-500 focus:outline-none py-2 bg-transparent" required>
-                                        <option value="">Choose a service</option>
-                                        {services.map((s) => (
-                                            <option key={s._id} value={s.slug}>{s.title}</option>
-                                        ))}
-                                    </select>
-                                </div>
-
-                                <div className="md:col-span-2">
-                                    <label className="block text-gray-600 font-medium mb-2">Type message *</label>
-                                    <textarea rows={4} placeholder="Write your message..." className="w-full border-b border-gray-300 focus:border-teal-500 focus:outline-none py-2 resize-none" required></textarea>
-                                </div>
-                                <button type="submit"
-                                    className='text-white bg-dark h-[50px] text-sm lg:text-16 w-fit rounded-full font-chakrapetch font-semibold flex gap-2 ps-4 pe-2 py-2 justify-center items-center tracking-wider group mt-5 lg:mt-0 cursor-pointer'
-                                >
-                                    Send a Message
-                                    <Icon icon="tabler:arrow-right" width="24" height="24" className='bg-prim text-white rounded-full h-full w-[35px] p-1.5 group-hover:-rotate-45 transition duration-300' />
-                                </button>
-                            </form>
+                            <ContactForm services={services} />
                         </div>
                         <div className="w-full lg:w-[50%] h-[350px] lg:h-[500px] rounded-2xl overflow-hidden">
                             <iframe src="https://www.google.com/maps?q=Kampala,Uganda&output=embed" width="100%" height="100%" loading="lazy"></iframe>
