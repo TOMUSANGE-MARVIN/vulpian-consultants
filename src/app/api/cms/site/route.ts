@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbConnect } from "@/lib/mongodb";
 import SiteContent from "@/models/SiteContent";
+import { revalidateSite } from "@/lib/revalidate";
 
 export async function GET() {
     await dbConnect();
@@ -9,6 +10,7 @@ export async function GET() {
         await SiteContent.create({ key: "site" });
         doc = await SiteContent.findOne({ key: "site" }).lean();
     }
+    revalidateSite();
     return NextResponse.json(doc);
 }
 
@@ -23,6 +25,8 @@ export async function PUT(req: NextRequest) {
         { $set: body },
         { new: true, upsert: true }
     ).lean();
+
+    revalidateSite();
 
     return NextResponse.json(doc);
 }

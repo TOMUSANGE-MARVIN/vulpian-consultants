@@ -85,8 +85,14 @@ export default async function RootLayout({
   // including /admin/login - must not 500 when the database is unreachable.
   let serviceLinks: { label: string; href: string }[] = [];
   let orgJson: unknown = null;
+  let contact: { address: string; phones: string[]; emails: string[] } | null = null;
   try {
     const [services, site] = await Promise.all([getServices(), getSiteContent()]);
+    contact = {
+      address: site.contact?.address ?? "",
+      phones: site.contact?.phones ?? [],
+      emails: site.contact?.emails ?? [],
+    };
     orgJson = organizationSchema({
       description: DEFAULT_DESCRIPTION,
       logo: site.logoUrl || "/images/logo/vulpian-logo-color.png",
@@ -113,7 +119,7 @@ export default async function RootLayout({
       >
         {orgJson ? <JsonLd data={orgJson} /> : null}
         <JsonLd data={websiteSchema()} />
-        <ConditionalChrome footer={<Footer />} serviceLinks={serviceLinks}>
+        <ConditionalChrome footer={<Footer />} serviceLinks={serviceLinks} contact={contact}>
           {children}
         </ConditionalChrome>
       </body>

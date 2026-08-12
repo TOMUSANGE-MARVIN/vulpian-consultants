@@ -54,42 +54,82 @@ function serialize<T>(doc: unknown): T {
     return JSON.parse(JSON.stringify(doc));
 }
 
+/** Used when the database is unreachable, so a blip can't fail a build. */
+const FALLBACK_SITE: SiteContent = {
+    companyName: "Vulpian Consultants",
+    tagline: "Empowering Excellence",
+    since: "2019",
+    logoUrl: "/images/logo/vulpian-logo-color.png",
+    hero: { title: "Empowering Excellence", ctaText: "Get Started", ctaHref: "/contact", quote: "" },
+    whoWeAre: { paragraphs: [] },
+    values: [],
+    vision: "",
+    mission: "",
+    approach: [],
+    contact: { address: "", phones: [], emails: [], linkedin: "", youtube: "" },
+};
+
 export async function getSiteContent(): Promise<SiteContent> {
-    await dbConnect();
-    let doc = await SiteContentModel.findOne({ key: "site" }).lean();
-    if (!doc) {
-        doc = await SiteContentModel.create({ key: "site" });
-        doc = await SiteContentModel.findOne({ key: "site" }).lean();
+    try {
+        await dbConnect();
+        let doc = await SiteContentModel.findOne({ key: "site" }).lean();
+        if (!doc) {
+            doc = await SiteContentModel.create({ key: "site" });
+            doc = await SiteContentModel.findOne({ key: "site" }).lean();
+        }
+        return serialize<SiteContent>(doc);
+    } catch (err) {
+        console.error("Could not load site content:", err);
+        return FALLBACK_SITE;
     }
-    return serialize<SiteContent>(doc);
 }
 
 export async function getServices(): Promise<Service[]> {
-    await dbConnect();
-    const docs = await ServiceModel.find({}).sort({ order: 1 }).lean();
-    return serialize<Service[]>(docs);
+    try {
+        await dbConnect();
+        const docs = await ServiceModel.find({}).sort({ order: 1 }).lean();
+        return serialize<Service[]>(docs);
+    } catch (err) {
+        console.error("Could not load services:", err);
+        return [];
+    }
 }
 
 export async function getServiceBySlug(slug: string): Promise<Service | null> {
-    await dbConnect();
-    const doc = await ServiceModel.findOne({ slug }).lean();
-    return doc ? serialize<Service>(doc) : null;
+    try {
+        await dbConnect();
+        const doc = await ServiceModel.findOne({ slug }).lean();
+        return doc ? serialize<Service>(doc) : null;
+    } catch (err) {
+        console.error("Could not load service:", err);
+        return null;
+    }
 }
 
 export async function getTeam(): Promise<TeamMember[]> {
-    await dbConnect();
-    const docs = await TeamMemberModel.find({}).sort({ order: 1 }).lean();
-    return serialize<TeamMember[]>(docs);
+    try {
+        await dbConnect();
+        const docs = await TeamMemberModel.find({}).sort({ order: 1 }).lean();
+        return serialize<TeamMember[]>(docs);
+    } catch (err) {
+        console.error("Could not load team:", err);
+        return [];
+    }
 }
 
 export async function getLeadConsultant(): Promise<TeamMember | null> {
+    try {
     await dbConnect();
     // Falls back to the first member by order, so someone added from the admin
     // still appears even though the admin has no "is lead" switch.
     const doc =
         (await TeamMemberModel.findOne({ isLead: true }).lean()) ??
         (await TeamMemberModel.findOne({}).sort({ order: 1 }).lean());
-    return doc ? serialize<TeamMember>(doc) : null;
+        return doc ? serialize<TeamMember>(doc) : null;
+    } catch (err) {
+        console.error("Could not load the lead consultant:", err);
+        return null;
+    }
 }
 
 /* ---------------------------------------------------------------------------

@@ -58,7 +58,7 @@ const siteContent = {
     contact: {
         address: "Kampala, Uganda",
         phones: ["+256 772142260", "+256 783776246"],
-        emails: ["nyimba89@gmail.com"],
+        emails: ["info@vulpianco.com"],
         linkedin: "Vulpian Consultants",
         youtube: "Vulpian-Consultants",
     },

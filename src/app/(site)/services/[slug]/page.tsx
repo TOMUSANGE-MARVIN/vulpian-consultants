@@ -18,7 +18,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     });
 }
 
-export const dynamic = "force-dynamic";
+// Served from cache and rebuilt in the background, so a visitor never waits
+// on a database round-trip. Admin edits revalidate this immediately.
+export const revalidate = 300;
 
 type Props = { params: Promise<{ slug: string }> };
 

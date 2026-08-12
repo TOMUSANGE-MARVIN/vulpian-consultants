@@ -11,7 +11,9 @@ export const metadata = pageMetadata({
     image: "/images/hero/hero-5.jpg",
 });
 
-export const dynamic = "force-dynamic";
+// Served from cache and rebuilt in the background, so a visitor never waits
+// on a database round-trip. Admin edits revalidate this immediately.
+export const revalidate = 300;
 
 const Page = async () => {
     const [site, services] = await Promise.all([getSiteContent(), getServices()]);

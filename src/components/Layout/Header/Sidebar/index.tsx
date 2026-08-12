@@ -6,9 +6,10 @@ import Link from "next/link";
 interface SidebarProps {
     isOpenSidebar: boolean;
     setIsOpenSidebar: React.Dispatch<React.SetStateAction<boolean>>;
+    contact?: { address: string; phones: string[]; emails: string[] } | null;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpenSidebar, setIsOpenSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpenSidebar, setIsOpenSidebar, contact = null }) => {
     return (
         <div
             className={`hidden lg:block fixed top-0 right-0 h-screen lg:w-[35%] xxl:w-[40%] shadow-2xl bg-dark-blur backdrop-blur-lg p-10 rounded-tl-3xl rounded-bl-3xl z-50 transform transition-transform duration-500 ease-in-out overflow-y-scroll
@@ -46,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSidebar, setIsOpenSidebar }) =>
                         href="/contact"
                         className="text-white font-unbounded font-normal"
                     >
-                        +256 772142260
+                        {contact?.phones?.[0] ?? ""}
                     </Link>
                 </div>
                 <div>
@@ -55,7 +56,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSidebar, setIsOpenSidebar }) =>
                         href="/contact"
                         className="text-white font-unbounded font-normal"
                     >
-                        nyimba89@gmail.com
+                        {contact?.emails?.[0] ?? ""}
                     </Link>
                 </div>
                 <div>
@@ -65,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpenSidebar, setIsOpenSidebar }) =>
                         href="/contact"
                         className="text-white font-unbounded font-normal"
                     >
-                        Kampala, Uganda
+                        {contact?.address ?? ""}
                     </Link>
                 </div>
             </div>

@@ -14,7 +14,9 @@ import {
   getFocusAreas, getStandards, getTestimonials, getPosts,
 } from "@/lib/cms";
 
-export const dynamic = "force-dynamic";
+// Served from cache and rebuilt in the background, so a visitor never waits
+// on a database round-trip. Admin edits revalidate this immediately.
+export const revalidate = 300;
 
 export default async function Home() {
   const [site, services, lead, focusAreas, standards, testimonials, posts] = await Promise.all([

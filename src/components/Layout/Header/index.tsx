@@ -9,7 +9,12 @@ import Sidebar from './Sidebar';
 import MobileHeaderLink from './Navigation/mobileheaderLinks';
 import type { SubmenuItem } from '@/type/menu';
 
-const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] }) => {
+type ContactInfo = { address: string; phones: string[]; emails: string[] };
+
+const Header: React.FC<{ serviceLinks?: SubmenuItem[]; contact?: ContactInfo | null }> = ({
+    serviceLinks = [],
+    contact = null,
+}) => {
     const headerData = buildHeaderData(serviceLinks);
     const [sticky, setSticky] = useState(false);
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -111,25 +116,8 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] 
                     ))}
                 </nav>
 
-                {/* Search */}
-                <h3 className="font-chakrapetch pb-3">Search Now!</h3>
-                <form className="search-box relative flex">
-                    <input
-                        type="text"
-                        placeholder="Search here..."
-                        className="bg-white ps-3 h-[45px]"
-                        required
-                    />
-                    <button
-                        type="submit"
-                        className="absolute right-0 h-full border-l border-border cursor-pointer"
-                    >
-                        <Icon icon="ei:search" width="50" height="30" />
-                    </button>
-                </form>
-
                 {/* Contact Info */}
-                <h3 className="font-chakrapetch pb-3 pt-8">Contact Info</h3>
+                <h3 className="font-chakrapetch pb-3 pt-4">Contact Info</h3>
                 <div className="space-y-3">
                     <div>
                         <span className="text-pera-light font-chakrapetch">Phone</span> <br />
@@ -137,7 +125,7 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] 
                             href="/contact"
                             className="text-white font-unbounded font-normal"
                         >
-                            +256 772142260
+                            {contact?.phones?.[0] ?? ""}
                         </Link>
                     </div>
                     <div>
@@ -146,7 +134,7 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] 
                             href="/contact"
                             className="text-white font-unbounded font-normal"
                         >
-                            nyimba89@gmail.com
+                            {contact?.emails?.[0] ?? ""}
                         </Link>
                     </div>
                     <div>
@@ -156,7 +144,7 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] 
                             href="/contact"
                             className="text-white font-unbounded font-normal"
                         >
-                            Kampala, Uganda
+                            {contact?.address ?? ""}
                         </Link>
                     </div>
                 </div>
@@ -186,6 +174,7 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[] }> = ({ serviceLinks = [] 
             </div>
 
             <Sidebar
+                contact={contact}
                 isOpenSidebar={isOpenSidebar}
                 setIsOpenSidebar={setIsOpenSidebar}
             />

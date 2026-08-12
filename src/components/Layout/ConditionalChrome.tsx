@@ -8,10 +8,12 @@ export default function ConditionalChrome({
     children,
     footer,
     serviceLinks = [],
+    contact = null,
 }: {
     children: ReactNode;
     footer: ReactNode;
     serviceLinks?: SubmenuItem[];
+    contact?: { address: string; phones: string[]; emails: string[] } | null;
 }) {
     const pathname = usePathname();
     const isAdmin = pathname?.startsWith("/admin");
@@ -20,7 +22,7 @@ export default function ConditionalChrome({
 
     return (
         <>
-            <Header serviceLinks={serviceLinks} />
+            <Header serviceLinks={serviceLinks} contact={contact} />
             {children}
             {footer}
         </>
