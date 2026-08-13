@@ -258,7 +258,7 @@ table(
         ["/team", "Lead Consultant", "CMS — Team"],
         ["/blog", "Blog listing", "CMS — Blog Posts"],
         ["/blog/[name]", "Article", "One page per article, automatic"],
-        ["/protfolio", "Case Studies", "CMS — Videos"],
+        ["/case-studies", "Case Studies", "CMS — Videos"],
         ["/faq", "FAQ", "CMS — FAQs"],
         ["/contact", "Contact", "CMS plus contact form"],
         ["/privacy-policy", "Privacy Policy", "In the code"],
@@ -269,12 +269,10 @@ table(
     mono_cols=(0,),
 )
 callout(
-    "Worth knowing",
-    "The Case Studies page sits at /protfolio — a spelling mistake inherited from the "
-    "original template. It works, and search engines treat it as a normal address, but if you "
-    "would rather it read /case-studies it is a small change now and a slightly larger one once "
-    "the page has been indexed.",
-    warn=True,
+    "Web addresses",
+    "Addresses are lower case and readable, which both visitors and search engines prefer. "
+    "Service and article addresses are generated from their titles, so they stay consistent "
+    "without anyone having to think about them.",
 )
 
 # ======================================================================= 4
@@ -358,7 +356,8 @@ rich([
      "so they load quickly. Photographs supplied for the original build were resized and "
      "optimised before use — the image library is ", False, False),
     ("3.7MB", True, False),
-    (" in total, down from around 120MB of unused template material that was removed.", False, False),
+    (" in total, after unused files were cleared out and every photograph was resized "
+     "to the dimensions it is actually displayed at.", False, False),
 ])
 
 # ======================================================================= 7

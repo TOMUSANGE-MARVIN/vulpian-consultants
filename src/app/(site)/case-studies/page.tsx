@@ -6,14 +6,14 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata = pageMetadata({
     title: "Case Studies & Videos",
     description: "Insights on quality management, ISO audit preparation, risk-based internal auditing and leadership from the Vulpian Consultants YouTube channel.",
-    path: "/protfolio",
+    path: "/case-studies",
     image: "/images/hero/hero-3.jpg",
 });
 
 const Page = () => {
     const breadcrumbLinks = [
         { href: "/", text: "Home" },
-        { href: "/protfolio", text: "Case Studies" },
+        { href: "/case-studies", text: "Case Studies" },
     ];
 
     return (
