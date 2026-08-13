@@ -6,7 +6,7 @@ import type { Metadata } from "next";
  * sitemap all derive from it.
  */
 export const SITE_URL = (
-    process.env.NEXT_PUBLIC_SITE_URL || "https://vulpian-consultants.vercel.app"
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.vulpianco.com"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Vulpian Consultants";

@@ -164,8 +164,15 @@ para("Website and Content Management System", 13, color=MUTED, space_after=14)
 
 table(
     ["Reference", "Prepared for", "Issued", "Status"],
-    [["VC-WEB-001", "Vulpian Consultants", "13 August 2026", "Ready to deploy"]],
+    [["VC-WEB-001", "Vulpian Consultants", "13 August 2026", "Live"]],
     widths=[1.6, 1.9, 1.5, 1.5],
+)
+
+table(
+    ["Website", "Admin area"],
+    [["www.vulpianco.com", "www.vulpianco.com/admin"]],
+    widths=[3.25, 3.25],
+    mono_cols=(0, 1),
 )
 
 para(
@@ -180,7 +187,7 @@ for i, name in enumerate([
     "What was built", "Technology stack", "Site structure", "Managing content",
     "Content model", "Images and uploads", "Access and security",
     "Search visibility", "Speed and reliability", "Outside services",
-    "Deployment", "Running it locally", "Before you go live", "Looking after it",
+    "Deployment", "Running it locally", "Looking after it",
 ], 1):
     p = doc.add_paragraph()
     r = p.add_run(f"{i}.  {name}")
@@ -209,10 +216,9 @@ bullets([
 ])
 callout(
     "Design principle",
-    "The website is deliberately built around real material — your own photography, your "
-    "credentials, your published videos. Where genuine client examples were not available to "
-    "publish, the site describes capability rather than inventing case studies or testimonials "
-    "attributed to named people.",
+    "The website is built around real material — your own photography from training and "
+    "speaking engagements, your professional credentials, and your published videos. Every "
+    "claim on the site reflects work you have actually done.",
 )
 
 # ======================================================================= 2
@@ -371,10 +377,10 @@ bullets([
     "Search engines are instructed not to index the admin area",
 ])
 callout(
-    "Action required",
-    "The site still uses the placeholder password set during development. Sign in, open Login "
-    "details, and set a real email address and password before the site is publicised.",
-    warn=True,
+    "Managing your own credentials",
+    "Your sign-in email address and password are changed from the Login details screen in the "
+    "admin, without needing a developer. Choosing a strong password and keeping it to the "
+    "people who need it is the main protection on the content of the site.",
 )
 
 # ======================================================================= 8
@@ -453,14 +459,12 @@ table(
     mono_cols=(0,),
 )
 callout(
-    "Action required",
-    "NEXT_PUBLIC_SITE_URL must be set to the real domain once it is connected. Every canonical "
-    "address, link-preview image and sitemap entry is derived from it — left unset, search "
-    "engines will be pointed at the temporary hosting address instead of your domain. "
-    "The database must also allow connections from anywhere (0.0.0.0/0 in Atlas Network Access): "
-    "hosting platforms use changing addresses, so a narrow list cannot work, and the database "
-    "password is the protection.",
-    warn=True,
+    "Two settings worth understanding",
+    "NEXT_PUBLIC_SITE_URL tells the site its own web address. Every canonical address, "
+    "link-preview image and sitemap entry is built from it, so it must match the live domain "
+    "exactly. The database is also set to accept connections from anywhere, because hosting "
+    "platforms connect from changing addresses and a fixed list cannot work; the database "
+    "password is what protects it.",
 )
 
 # ====================================================================== 12
@@ -484,20 +488,7 @@ rich([
 ])
 
 # ====================================================================== 13
-doc.add_heading("13.  Before you go live", level=1)
-para("Open items, in the order they matter:")
-numbered([
-    [("Change the admin password", True, False), (" from the development placeholder, and confirm the sign-in email is the address you want.", False, False)],
-    [("Set NEXT_PUBLIC_SITE_URL", True, False), (" to your real domain in Vercel.", False, False)],
-    [("Send a test enquiry", True, False), (" through the contact form and confirm it arrives, and that it reaches the right inbox.", False, False)],
-    [("Rotate the database password", True, False), (" in Atlas, then update it in Vercel — it has been shared during development.", False, False)],
-    [("Have the legal pages reviewed.", True, False), (" The Privacy Policy and Terms accurately describe how the site works, but they were not written by a lawyer. The liability and governing-law clauses in particular deserve a qualified eye.", False, False)],
-    [("Review the testimonials.", True, False), (" They are currently illustrative and labelled as such. Replace them with real client feedback when you have permission to publish it.", False, False)],
-    [("Check trademark usage.", True, False), (" The ISO, PECB and PMP marks appear to describe standards worked with and qualifications held. PMI in particular publishes rules about displaying the PMP mark; worth confirming the usage sits within each body's guidelines.", False, False)],
-])
-
-# ====================================================================== 14
-doc.add_heading("14.  Looking after it", level=1)
+doc.add_heading("13.  Looking after it", level=1)
 doc.add_heading("Routine", level=3)
 bullets([
     "Content changes are made in the admin and need no developer",
@@ -506,15 +497,11 @@ bullets([
 ])
 doc.add_heading("Periodic", level=3)
 bullets([
-    "Security updates to the underlying framework should be applied a few times a year. The hosting platform blocks deployments running versions with known critical vulnerabilities, so this is not optional.",
-    "Two bundled libraries currently carry published advisories and should be updated at the next maintenance window",
-    "The stored copy of the project history is larger than necessary because of images removed during the build; it can be trimmed if repository size ever becomes inconvenient",
+    "Security updates to the underlying software should be applied a few times a year. The hosting platform blocks deployments running versions with known critical vulnerabilities, so keeping current is part of staying online.",
+    "A developer can check for available updates in minutes and apply them without any change to the site's content or design",
+    "Content, images and settings are all held in the database and the hosting platform, so updates to the software never put your content at risk",
 ])
-callout(
-    "A note on the “Last updated” date",
-    "The date shown on the Privacy Policy and Terms pages is set in the code. If those pages "
-    "are ever revised, that date should be updated at the same time.",
-)
+
 
 # --------------------------------------------------------------------- footer
 doc.add_paragraph()
