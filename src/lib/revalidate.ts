@@ -9,6 +9,10 @@ import { revalidatePath } from "next/cache";
 export function revalidateSite() {
     try {
         revalidatePath("/", "layout");
+        // The sitemap is not part of the layout tree, so it needs clearing on
+        // its own — otherwise a new post could take an hour to become
+        // discoverable by search engines.
+        revalidatePath("/sitemap.xml");
     } catch (err) {
         // Never let a cache-clear failure break a successful save.
         console.error("Could not revalidate the site cache:", err);

@@ -2,7 +2,10 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { getServices, getPosts } from "@/lib/cms";
 
-export const dynamic = "force-dynamic";
+// Cached rather than rebuilt per request: crawlers should never be waiting on
+// a database round-trip, and an admin save clears this explicitly (see
+// revalidateSite), so new services and posts still appear immediately.
+export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const now = new Date();
