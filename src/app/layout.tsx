@@ -74,6 +74,15 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     images: ["/images/hero/hero-1.jpg"],
   },
+  // Search-engine ownership verification. Set the code from Search Console /
+  // Bing Webmaster Tools as an environment variable and redeploy; leaving it
+  // unset simply omits the tag.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
 };
 
 export default async function RootLayout({
