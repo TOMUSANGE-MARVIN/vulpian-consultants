@@ -163,9 +163,16 @@ const Footer = async () => {
 
                 {/* ===== Bottom Section ===== */}
                 <div className="flex flex-col sm:flex-row justify-between items-center border-t border-white/15 mt-10 pt-6 text-center sm:text-left">
-                    <p className="text-[15px] text-white/70 mb-3 sm:mb-0">
-                        © {new Date().getFullYear()} {site.companyName}. All rights reserved.
-                    </p>
+                    <div className="mb-3 sm:mb-0">
+                        <p className="text-[15px] text-white/70">
+                            © {new Date().getFullYear()} {site.companyName}. All rights reserved.
+                        </p>
+                        <p className="text-[15px] text-white/70 mt-1 flex flex-wrap gap-x-3 gap-y-1 justify-center sm:justify-start">
+                            <Link href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                            <span aria-hidden className="text-white/30">|</span>
+                            <Link href="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+                        </p>
+                    </div>
                     <p className="text-[15px] text-white/70">
                         Designed by{" "}
                         <a
