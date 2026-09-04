@@ -1,6 +1,7 @@
 import React from "react";
 import HeroSub from "@/components/SharedComponents/HeroSub";
 import Videos from "@/components/SharedComponents/Videos";
+import LinkedInPosts from "@/components/SharedComponents/LinkedInPosts";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -9,6 +10,8 @@ export const metadata = pageMetadata({
     path: "/case-studies",
     image: "/images/hero/hero-3.jpg",
 });
+
+export const revalidate = 300;
 
 const Page = () => {
     const breadcrumbLinks = [
@@ -20,6 +23,7 @@ const Page = () => {
         <>
             <HeroSub title="Case Studies" description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-3.jpg" />
             <Videos />
+            <LinkedInPosts />
         </>
     );
 };

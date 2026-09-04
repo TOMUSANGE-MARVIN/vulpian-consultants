@@ -145,6 +145,7 @@ export type Standard = { _id: string; label: string; sub: string; src: string; r
 export type Testimonial = { _id: string; text: string; position: string };
 export type Faq = { _id: string; question: string; answer: string };
 export type VideoItem = { _id: string; videoUrl: string; title: string };
+export type LinkedInPost = { _id: string; postUrl: string; title: string; image: string };
 export type Post = {
     _id: string; title: string; slug: string; category: string; author: string; date: string;
     image: string; description: string; body: string[]; takeaways: string[];
@@ -172,6 +173,7 @@ export const getStandards = () => listOf<Standard>("standards");
 export const getTestimonials = () => listOf<Testimonial>("testimonials");
 export const getFaqs = () => listOf<Faq>("faqs");
 export const getVideos = () => listOf<VideoItem>("videos");
+export const getLinkedInPosts = () => listOf<LinkedInPost>("linkedinposts");
 export const getPosts = () => listOf<Post>("blogs");
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {

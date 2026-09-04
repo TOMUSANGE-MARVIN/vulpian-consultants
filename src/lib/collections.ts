@@ -162,6 +162,20 @@ export const collections: Collection[] = [
         ],
     },
     {
+        name: "linkedinposts",
+        label: "LinkedIn Posts",
+        singular: "LinkedIn post",
+        icon: "mdi:linkedin",
+        description: "Posts from your LinkedIn page.",
+        appearsOn: "Case Studies page",
+        titleField: "title",
+        fields: [
+            { name: "postUrl", label: "LinkedIn link", type: "url", required: true, help: "Open the post on LinkedIn, copy the address from your browser, and paste it here.", placeholder: "https://www.linkedin.com/posts/..." },
+            { name: "title", label: "Title", type: "text", required: true, help: "A short line describing the post. This is what visitors read on the card." },
+            { name: "image", label: "Post image", type: "image", help: "The picture from the post. LinkedIn does not let us fetch this automatically, so save it from the post and upload it here." },
+        ],
+    },
+    {
         name: "blogs",
         label: "Blog Posts",
         singular: "post",

@@ -5,6 +5,7 @@ import "./globals.css";
 import Footer from "@/components/Layout/Footer";
 import ConditionalChrome from "@/components/Layout/ConditionalChrome";
 import { getServices, getSiteContent } from "@/lib/cms";
+import { linkedinProfileUrl } from "@/lib/links";
 import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, organizationSchema, websiteSchema, JsonLd } from "@/lib/seo";
 
 const chakraPetch = Chakra_Petch({
@@ -109,7 +110,7 @@ export default async function RootLayout({
       emails: site.contact?.emails ?? [],
       address: site.contact?.address ?? "Kampala, Uganda",
       sameAs: [
-        site.contact?.linkedin ? `https://www.linkedin.com/company/${site.contact.linkedin.replace(/\s+/g, "-").toLowerCase()}` : "",
+        linkedinProfileUrl(site.contact?.linkedin || ""),
         "https://www.youtube.com/@Vulpian-Consultants",
       ],
     });
