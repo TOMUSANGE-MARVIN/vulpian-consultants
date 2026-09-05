@@ -11,6 +11,7 @@ export const buildHeaderData = (serviceLinks: SubmenuItem[] = []): HeaderItem[] 
         submenu: serviceLinks.length > 0 ? serviceLinks : undefined,
     },
     { label: "Case Studies", href: "/case-studies" },
+    { label: "Updates", href: "/updates" },
     { label: "FAQ", href: "/faq" },
     { label: "Blogs", href: "/blog" },
     { label: "Contact", href: "/contact" },

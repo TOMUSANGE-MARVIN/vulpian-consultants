@@ -167,7 +167,7 @@ export const collections: Collection[] = [
         singular: "LinkedIn post",
         icon: "mdi:linkedin",
         description: "Posts from your LinkedIn page.",
-        appearsOn: "Case Studies page",
+        appearsOn: "Updates page",
         titleField: "title",
         fields: [
             { name: "postUrl", label: "LinkedIn link", type: "url", required: true, help: "Open the post on LinkedIn, copy the address from your browser, and paste it here.", placeholder: "https://www.linkedin.com/posts/..." },

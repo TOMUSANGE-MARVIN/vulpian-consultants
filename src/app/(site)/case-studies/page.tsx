@@ -1,7 +1,6 @@
 import React from "react";
 import HeroSub from "@/components/SharedComponents/HeroSub";
 import Videos from "@/components/SharedComponents/Videos";
-import LinkedInPosts from "@/components/SharedComponents/LinkedInPosts";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata = pageMetadata({
@@ -23,7 +22,6 @@ const Page = () => {
         <>
             <HeroSub title="Case Studies" description="" breadcrumbLinks={breadcrumbLinks} image="/images/hero/hero-3.jpg" />
             <Videos />
-            <LinkedInPosts />
         </>
     );
 };
