@@ -141,7 +141,7 @@ import { getModel } from "@/models/dynamic";
 
 export type FocusArea = { _id: string; category: string; title: string; description: string; image: string; link: string };
 export type Reason = { _id: string; icon: string; title: string; description: string };
-export type Standard = { _id: string; label: string; sub: string; src: string; renderHeight: number };
+export type Standard = { _id: string; label: string; sub: string; src: string; link?: string; renderHeight: number };
 export type Testimonial = { _id: string; text: string; position: string };
 export type Faq = { _id: string; question: string; answer: string };
 export type VideoItem = { _id: string; videoUrl: string; title: string };

@@ -119,6 +119,7 @@ export const collections: Collection[] = [
             { name: "label", label: "Name", type: "text", required: true, placeholder: "ISO 9001:2015" },
             { name: "sub", label: "Caption", type: "text", placeholder: "Quality Management" },
             { name: "src", label: "Logo", type: "image" },
+            { name: "link", label: "Official website", type: "url", help: "Optional. The standard's own website, e.g. https://pecb.com. Visitors who click the logo are taken there.", placeholder: "https://pecb.com" },
             { name: "renderHeight", label: "Display height", type: "number", help: "Pixels. Around 40 for wide logos, 58 for round ones." },
         ],
     },

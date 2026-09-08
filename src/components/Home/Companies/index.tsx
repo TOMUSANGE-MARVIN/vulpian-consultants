@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import type { Standard } from "@/lib/cms";
+import { externalUrl } from "@/lib/links";
 
 
 const Companies: React.FC<{ standards: Standard[] }> = ({ standards }) => {
@@ -42,9 +43,9 @@ const Companies: React.FC<{ standards: Standard[] }> = ({ standards }) => {
                         }}
                         className="companies-swiper relative"
                     >
-                        {standards.map((standard) => (
-                            <SwiperSlide key={standard._id}>
-                                <div className="companies-item h-[120px] w-full px-4 flex flex-col items-center justify-center gap-3">
+                        {standards.map((standard) => {
+                            const body = (
+                                <>
                                     <Image
                                         src={standard.src}
                                         alt={standard.label}
@@ -56,9 +57,31 @@ const Companies: React.FC<{ standards: Standard[] }> = ({ standards }) => {
                                     <p className="standard-caption text-13 leading-tight text-center">
                                         {standard.sub}
                                     </p>
-                                </div>
-                            </SwiperSlide>
-                        ))}
+                                </>
+                            );
+                            const itemClass = "companies-item h-[120px] w-full px-4 flex flex-col items-center justify-center gap-3";
+
+                            return (
+                                <SwiperSlide key={standard._id}>
+                                    {/* A standard only becomes a link once someone has
+                                        given it one, so a blank field stays inert
+                                        rather than becoming a dead link. */}
+                                    {standard.link ? (
+                                        <a
+                                            href={externalUrl(standard.link)}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            title={`Visit the official ${standard.label} website`}
+                                            className={`${itemClass} cursor-pointer`}
+                                        >
+                                            {body}
+                                        </a>
+                                    ) : (
+                                        <div className={itemClass}>{body}</div>
+                                    )}
+                                </SwiperSlide>
+                            );
+                        })}
                     </Swiper>
                 </div>
             </section>
