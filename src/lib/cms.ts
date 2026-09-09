@@ -145,6 +145,10 @@ export type Standard = { _id: string; label: string; sub: string; src: string; l
 export type Testimonial = { _id: string; text: string; position: string };
 export type Faq = { _id: string; question: string; answer: string };
 export type VideoItem = { _id: string; videoUrl: string; title: string };
+export type Course = {
+    _id: string; title: string; standard?: string; summary: string;
+    duration?: string; delivery?: string; fee?: string; image?: string; outline?: string[];
+};
 export type LinkedInPost = { _id: string; postUrl: string; title: string; image: string };
 export type Post = {
     _id: string; title: string; slug: string; category: string; author: string; date: string;
@@ -173,6 +177,7 @@ export const getStandards = () => listOf<Standard>("standards");
 export const getTestimonials = () => listOf<Testimonial>("testimonials");
 export const getFaqs = () => listOf<Faq>("faqs");
 export const getVideos = () => listOf<VideoItem>("videos");
+export const getCourses = () => listOf<Course>("courses");
 export const getLinkedInPosts = () => listOf<LinkedInPost>("linkedinposts");
 export const getPosts = () => listOf<Post>("blogs");
 

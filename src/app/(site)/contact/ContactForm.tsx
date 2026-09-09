@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import type { Service } from "@/lib/cms";
-
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/xjybrrvn";
+import { FORMSPREE_ENDPOINT } from "@/lib/forms";
 
 const fieldClass =
     "w-full border-b border-gray-300 focus:border-dark focus:outline-none py-2";
