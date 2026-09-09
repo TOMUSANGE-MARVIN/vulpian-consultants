@@ -38,13 +38,13 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[]; contact?: ContactInfo | n
                     <div className='text-white'>
                         <Logo />
                     </div>
-                    <nav className='hidden lg:flex grow items-center justify-center space-x-10 text-base'>
+                    <nav className='hidden xl:flex grow items-center justify-center xl:space-x-4 2xl:space-x-8 text-base'>
                         {headerData.map((item, index) => (
                             <HeaderLinks key={index} item={item} scrolled={sticky} />
                         ))}
                     </nav>
 
-                    <div className='nav-right gap-4 hidden lg:flex items-center'>
+                    <div className='nav-right gap-4 hidden xl:flex items-center'>
                         <Link
                             href="/contact"
                             className='text-white bg-dark h-[50px] rounded-full font-chakrapetch font-semibold flex gap-2 ps-4 pe-2 py-2 w-auto justify-center items-center tracking-wider group'
@@ -70,7 +70,7 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[]; contact?: ContactInfo | n
 
                     <button
                         onClick={() => setNavbarOpen(!navbarOpen)}
-                        className="lg:hidden block p-2 cursor-pointer group"
+                        className="xl:hidden block p-2 cursor-pointer group"
                         aria-label="Toggle mobile menu"
                     >
                         <span className={`block w-6 h-0.5 transition-colors duration-500 ${sticky ? "bg-prim" : "bg-white"}`}></span>
@@ -87,7 +87,7 @@ const Header: React.FC<{ serviceLinks?: SubmenuItem[]; contact?: ContactInfo | n
 
             <div
                 ref={mobileMenuRef}
-                className={`lg:hidden fixed top-0 right-0 h-screen w-full sm:w-[50%] lg:w-[40%] shadow-2xl bg-dark-blur backdrop-blur-lg p-10 z-50 transform transition-transform overflow-y-scroll duration-500 ease-in-out ${navbarOpen ? "-translate-x-0" : "translate-x-[110%]"
+                className={`xl:hidden fixed top-0 right-0 h-screen w-full sm:w-[50%] lg:w-[40%] shadow-2xl bg-dark-blur backdrop-blur-lg p-10 z-50 transform transition-transform overflow-y-scroll duration-500 ease-in-out ${navbarOpen ? "-translate-x-0" : "translate-x-[110%]"
                     }`}
             >
                 <div className="text-white flex justify-between items-center w-full">

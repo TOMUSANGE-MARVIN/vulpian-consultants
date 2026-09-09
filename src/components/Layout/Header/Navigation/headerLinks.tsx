@@ -12,10 +12,10 @@ const HeaderLinks: React.FC<{ item: HeaderItem; scrolled?: boolean }> = ({ item,
     const isWide = (item.submenu?.length ?? 0) > 6;
 
     return (
-        <div className='relative group'>
+        <div className='relative group shrink-0'>
             <Link
                 href={item.href}
-                className={`text-base font-normal flex items-center transition-colors duration-500 ${scrolled ? "text-prim hover:text-dark" : "text-white hover:text-white"}`}
+                className={`text-base font-normal flex items-center whitespace-nowrap transition-colors duration-500 ${scrolled ? "text-prim hover:text-dark" : "text-white hover:text-white"}`}
             >
                 {item.label}
                 {item.submenu && (
